@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ng_bonfire/screens/ng_game.dart';
+import 'package:ng_bonfire/screens/map_render.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   SystemChrome.setPreferredOrientations(
           [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight])
       .then((_) {
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(fontFamily: 'PressStart2P'),
       debugShowCheckedModeBanner: false,
-      home: const NGGame(),
+      home: const MapRender(),
     );
   }
 }
