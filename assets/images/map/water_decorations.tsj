@@ -1,0 +1,14 @@
+{ "columns":6,
+ "image":"water_decorations.png",
+ "imageheight":32,
+ "imagewidth":96,
+ "margin":0,
+ "name":"water_decorations",
+ "spacing":0,
+ "tilecount":12,
+ "tiledversion":"1.9.1",
+ "tileheight":16,
+ "tilewidth":16,
+ "type":"tileset",
+ "version":"1.8"
+}

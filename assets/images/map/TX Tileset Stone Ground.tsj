@@ -1,0 +1,14 @@
+{ "columns":16,
+ "image":"Pixel Art Top Down - Basic\/Texture\/TX Tileset Stone Ground.png",
+ "imageheight":256,
+ "imagewidth":256,
+ "margin":0,
+ "name":"TX Tileset Stone Ground",
+ "spacing":0,
+ "tilecount":256,
+ "tiledversion":"1.9.1",
+ "tileheight":16,
+ "tilewidth":16,
+ "type":"tileset",
+ "version":"1.8"
+}

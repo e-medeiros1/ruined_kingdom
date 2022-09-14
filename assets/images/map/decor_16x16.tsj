@@ -1,0 +1,27 @@
+{ "columns":4,
+ "image":"decor_16x16.png",
+ "imageheight":80,
+ "imagewidth":64,
+ "margin":0,
+ "name":"decor_16x16",
+ "spacing":0,
+ "tilecount":20,
+ "tiledversion":"1.9.1",
+ "tileheight":16,
+ "tiles":[
+        {
+         "animation":[
+                {
+                 "duration":150,
+                 "tileid":0
+                }, 
+                {
+                 "duration":150,
+                 "tileid":1
+                }],
+         "id":0
+        }],
+ "tilewidth":16,
+ "type":"tileset",
+ "version":"1.8"
+}

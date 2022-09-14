@@ -1,0 +1,14 @@
+{ "columns":6,
+ "image":"GuttyKreumNatureTilesvol1_v2\/GuttyKreumNatureTilesvol1_v2\/AnimationFrames\/Tree\/tree96x96transparentanimated1.png",
+ "imageheight":96,
+ "imagewidth":96,
+ "margin":0,
+ "name":"tree96x96transparentanimated1",
+ "spacing":0,
+ "tilecount":36,
+ "tiledversion":"1.9.1",
+ "tileheight":16,
+ "tilewidth":16,
+ "type":"tileset",
+ "version":"1.8"
+}

@@ -1,0 +1,14 @@
+{ "columns":6,
+ "image":"plains.png",
+ "imageheight":192,
+ "imagewidth":96,
+ "margin":0,
+ "name":"plains",
+ "spacing":0,
+ "tilecount":72,
+ "tiledversion":"1.9.1",
+ "tileheight":16,
+ "tilewidth":16,
+ "type":"tileset",
+ "version":"1.8"
+}

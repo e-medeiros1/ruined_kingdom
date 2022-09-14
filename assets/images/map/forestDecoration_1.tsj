@@ -1,0 +1,14 @@
+{ "columns":15,
+ "image":"forestDecoration_1.png",
+ "imageheight":176,
+ "imagewidth":240,
+ "margin":0,
+ "name":"forestDecoration_1",
+ "spacing":0,
+ "tilecount":165,
+ "tiledversion":"1.9.1",
+ "tileheight":16,
+ "tilewidth":16,
+ "type":"tileset",
+ "version":"1.8"
+}

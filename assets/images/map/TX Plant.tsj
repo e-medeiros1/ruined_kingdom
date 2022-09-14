@@ -1,0 +1,14 @@
+{ "columns":32,
+ "image":"TX Plant.png",
+ "imageheight":512,
+ "imagewidth":512,
+ "margin":0,
+ "name":"TX Plant",
+ "spacing":0,
+ "tilecount":1024,
+ "tiledversion":"1.9.1",
+ "tileheight":16,
+ "tilewidth":16,
+ "type":"tileset",
+ "version":"1.8"
+}
