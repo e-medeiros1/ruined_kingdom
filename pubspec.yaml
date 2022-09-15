@@ -65,6 +65,7 @@ flutter:
     - assets/images/decoration/
     - assets/images/enemies/
     - assets/images/enemies/boss/
+    - assets/images/enemies/firer/
     - assets/images/hero/
     - assets/images/hero/warrior/
   

@@ -390,9 +390,31 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":8,
+         "name":"enemy1",
+         "objects":[
+                {
+                 "class":"",
+                 "height":0,
+                 "id":4,
+                 "name":"enemy1",
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":869.666666666667,
+                 "y":279
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":8,
- "nextobjectid":3,
+ "nextlayerid":9,
+ "nextobjectid":5,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.1",

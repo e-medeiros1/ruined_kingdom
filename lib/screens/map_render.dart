@@ -3,6 +3,7 @@ import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:ng_bonfire/utils/basic_value.dart';
 import 'package:ng_bonfire/widgets/enemies/boss/boss.dart';
+import 'package:ng_bonfire/widgets/enemies/firer/firer.dart';
 import 'package:ng_bonfire/widgets/player/player.dart';
 
 const double tileSize = BasicValues.TILE_SIZE;
@@ -30,6 +31,7 @@ class _MapRenderState extends State<MapRender> {
             forceTileSize: Vector2.all(tileSize),
             objectsBuilder: {
               'boss': (properties) => Boss(position: Vector2(tileSize * 65, tileSize * 9), ),
+              'enemy1': (properties) => Firer(position: Vector2(tileSize * 54, tileSize * 17) ),
             },
           ),
           player: GamePlayer(position: Vector2(tileSize * 20, tileSize * 31)),

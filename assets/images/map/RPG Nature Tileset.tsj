@@ -77,11 +77,57 @@
         }, 
         {
          "class":"above",
-         "id":40
+         "id":40,
+         "objectgroup":
+            {
+             "draworder":"index",
+             "id":2,
+             "name":"",
+             "objects":[
+                    {
+                     "class":"",
+                     "height":4.63636363636364,
+                     "id":1,
+                     "name":"",
+                     "rotation":0,
+                     "visible":true,
+                     "width":13.5454545454545,
+                     "x":2.45454545454545,
+                     "y":11.3636363636364
+                    }],
+             "opacity":1,
+             "type":"objectgroup",
+             "visible":true,
+             "x":0,
+             "y":0
+            }
         }, 
         {
          "class":"above",
-         "id":41
+         "id":41,
+         "objectgroup":
+            {
+             "draworder":"index",
+             "id":2,
+             "name":"",
+             "objects":[
+                    {
+                     "class":"",
+                     "height":5.09090909090909,
+                     "id":1,
+                     "name":"",
+                     "rotation":0,
+                     "visible":true,
+                     "width":15,
+                     "x":0,
+                     "y":10.9090909090909
+                    }],
+             "opacity":1,
+             "type":"objectgroup",
+             "visible":true,
+             "x":0,
+             "y":0
+            }
         }, 
         {
          "class":"above",
@@ -232,7 +278,6 @@
          "id":85
         }, 
         {
-         "class":"above",
          "id":120,
          "objectgroup":
             {
@@ -258,7 +303,6 @@
             }
         }, 
         {
-         "class":"above",
          "id":121,
          "objectgroup":
             {
