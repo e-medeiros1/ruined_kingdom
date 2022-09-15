@@ -64,7 +64,9 @@ flutter:
     - assets/images/map/
     - assets/images/decoration/
     - assets/images/enemies/
+    - assets/images/enemies/boss/
     - assets/images/hero/
+    - assets/images/hero/warrior/
   
 
   # An image asset can refer to one or more resolution-specific "variants", see
