@@ -375,7 +375,7 @@
          "name":"boss",
          "objects":[
                 {
-                 "class":"above",
+                 "class":"",
                  "height":16,
                  "id":2,
                  "name":"boss",
