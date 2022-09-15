@@ -73,10 +73,11 @@ class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
             margin: tileSize,
           );
         },
-        notObserved: () {
-          runRandomMovement(dt);
-        },
-        radiusVision: tileSize * 5,
+        // notObserved: () {
+        //   runRandomMovement(dt,
+        //       maxDistance: 10, runOnlyVisibleInCamera: true, speed: 20);
+        // },
+        radiusVision: tileSize * 8,
       );
     }
     super.update(dt);
@@ -90,7 +91,7 @@ class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
         -damage,
         initVelocityTop: -2,
         config: TextStyle(
-          color: Colors.red.shade600,
+          color: Colors.red.shade200,
           fontSize: tileSize / 2,
         ),
       );
@@ -202,8 +203,8 @@ class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
   void _execAttack() {
     simpleAttackMelee(
       damage: 50,
-      size: Vector2.all(tileSize * 3),
-      interval: 1500,
+      size: Vector2.all(tileSize * 2),
+      interval: 800,
       execute: () {
         _addBossAttackAnimation();
       },

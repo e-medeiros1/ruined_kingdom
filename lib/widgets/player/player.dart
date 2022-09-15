@@ -37,7 +37,7 @@ class GamePlayer extends SimplePlayer with ObjectCollision {
   void render(Canvas canvas) {
     drawDefaultLifeBar(
       canvas,
-      width: 37,
+      width: 39,
       borderWidth: 1,
       height: 4,
       align: const Offset(69, -58),
@@ -55,7 +55,7 @@ class GamePlayer extends SimplePlayer with ObjectCollision {
         event.event == ActionEvent.DOWN) {
       _addAttackAnimation();
       simpleAttackMelee(
-        damage: 30,
+        damage: 25,
         size: Vector2.all(tileSize),
         withPush: false,
       );
