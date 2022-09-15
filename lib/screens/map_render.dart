@@ -2,7 +2,7 @@ import 'dart:math';
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:ng_bonfire/utils/basic_value.dart';
-import 'package:ng_bonfire/widgets/enemies/boss.dart';
+import 'package:ng_bonfire/widgets/enemies/boss/boss.dart';
 import 'package:ng_bonfire/widgets/player/player.dart';
 
 const double tileSize = BasicValues.TILE_SIZE;
@@ -24,7 +24,7 @@ class _MapRenderState extends State<MapRender> {
         width: sizeScreen,
         height: sizeScreen,
         child: BonfireWidget(
-          // showCollisionArea: true,
+          showCollisionArea: false,
           map: WorldMapByTiled(
             'map/gamemap.json',
             forceTileSize: Vector2.all(tileSize),

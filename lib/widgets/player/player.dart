@@ -9,8 +9,8 @@ class GamePlayer extends SimplePlayer with ObjectCollision {
   GamePlayer({required Vector2 position})
       : super(
           position: position,
-          speed: 200,
-          size: Vector2(tileSize * 5.5, tileSize * 5.5),
+          speed: 180,
+          size: Vector2(tileSize * 6, tileSize * 6),
           life: 200,
           animation: SimpleDirectionAnimation(
             idleRight: PlayerSpriteSheet.playerIdleRight,
@@ -25,7 +25,7 @@ class GamePlayer extends SimplePlayer with ObjectCollision {
         collisions: [
           CollisionArea.rectangle(
             size: Vector2(16, 27),
-            align: Vector2(80, 85),
+            align: Vector2(89, 95),
           ),
         ],
       ),
@@ -77,6 +77,7 @@ class GamePlayer extends SimplePlayer with ObjectCollision {
 
 //Attack animation
   void _addAttackAnimation() {
+    lockMove = true;
     Future<SpriteAnimation> newAnimation;
     switch (lastDirection) {
       case Direction.left:
@@ -112,7 +113,13 @@ class GamePlayer extends SimplePlayer with ObjectCollision {
         newAnimation = PlayerSpriteSheet.attackRight;
         break;
     }
-    animation!.playOnce(newAnimation);
+    animation!.playOnce(
+      newAnimation,
+      runToTheEnd: true,
+      onFinish: (() {
+        lockMove = false;
+      }),
+    );
   }
 
 //DamageTaken
@@ -152,11 +159,9 @@ class GamePlayer extends SimplePlayer with ObjectCollision {
         newAnimation = PlayerSpriteSheet.takeHitRight;
         break;
     }
-    animation!.playOnce(
-      newAnimation,
-      runToTheEnd: true,
-      onFinish: onFinish,
-    );
+    animation!.playOnce(newAnimation, runToTheEnd: true, onFinish: () {
+      lockMove = false;
+    });
   }
 
   //Die

@@ -1,7 +1,7 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:ng_bonfire/utils/basic_value.dart';
-import 'package:ng_bonfire/widgets/enemies/boss_sprite_sheet.dart';
+import 'package:ng_bonfire/widgets/enemies/boss/boss_sprite_sheet.dart';
 // import 'dart:io' show Platform;
 
 const tileSize = BasicValues.TILE_SIZE;
@@ -12,7 +12,7 @@ class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
       : super(
           life: 500,
           position: position,
-          speed: 30,
+          speed: 50,
           size: Vector2(64 * 5.5, 64 * 5.5),
           animation: SimpleDirectionAnimation(
             idleRight: BossSpriteSheet.bossIdleRight,
@@ -65,9 +65,7 @@ class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
                 margin: tileSize,
                 player,
                 dt,
-                closeComponent: (comp) {
-                  _execAttack();
-                },
+                closeComponent: (player) => _execAttack(),
               );
             },
             radiusVision: tileSize * 8,
@@ -88,12 +86,14 @@ class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
   void receiveDamage(AttackFromEnum attacker, double damage, identify) {
     if (!isDead) {
       _addDamageAnimation();
-      showDamage(-damage,
-          initVelocityTop: -2,
-          config: const TextStyle(
-            color: Colors.white,
-            fontSize: tileSize / 2,
-          ));
+      showDamage(
+        -damage,
+        initVelocityTop: -2,
+        config: TextStyle(
+          color: Colors.red.shade600,
+          fontSize: tileSize / 2,
+        ),
+      );
     }
     super.receiveDamage(attacker, damage, identify);
   }
@@ -101,6 +101,7 @@ class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
 //Attack animation
 
   void _addBossAttackAnimation() {
+    canMove = false;
     Future<SpriteAnimation> newAnimation;
     switch (lastDirection) {
       case Direction.left:
@@ -110,35 +111,45 @@ class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
         newAnimation = BossSpriteSheet.attackRight;
         break;
       case Direction.up:
-      
-      if (lastDirectionHorizontal == Direction.right) {
-        newAnimation = BossSpriteSheet.attackRight;
-      } else {
-        newAnimation = BossSpriteSheet.attackLeft;
-      }
-      break;
+        if (lastDirectionHorizontal == Direction.right) {
+          newAnimation = BossSpriteSheet.attackRight;
+        } else {
+          newAnimation = BossSpriteSheet.attackLeft;
+        }
+        break;
+
       case Direction.down:
-        
-      if (lastDirectionHorizontal == Direction.right) {
-        newAnimation = BossSpriteSheet.attackRight;
-      } else {
-        newAnimation = BossSpriteSheet.attackLeft;
-      }
-      break;
+        if (lastDirectionHorizontal == Direction.right) {
+          newAnimation = BossSpriteSheet.attackRight;
+        } else {
+          newAnimation = BossSpriteSheet.attackLeft;
+        }
+        break;
+
       case Direction.upLeft:
         newAnimation = BossSpriteSheet.attackLeft;
         break;
+
       case Direction.upRight:
         newAnimation = BossSpriteSheet.attackRight;
         break;
+
       case Direction.downLeft:
         newAnimation = BossSpriteSheet.attackLeft;
         break;
+
       case Direction.downRight:
         newAnimation = BossSpriteSheet.attackRight;
         break;
     }
-    animation!.playOnce(newAnimation);
+
+    animation!.playOnce(
+      newAnimation,
+      runToTheEnd: true,
+      onFinish: () {
+        canMove = true;
+      },
+    );
   }
 
 //Damage taken
@@ -181,7 +192,7 @@ class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
     }
     animation!.playOnce(
       newAnimation,
-      runToTheEnd: false,
+      runToTheEnd: true,
       onFinish: () {
         canMove = true;
       },
@@ -191,10 +202,8 @@ class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
   void _execAttack() {
     simpleAttackMelee(
       damage: 50,
-      size: Vector2.all(tileSize * 5),
+      size: Vector2.all(tileSize * 3),
       interval: 1500,
-      withPush: true,
-      sizePush: tileSize / 2,
       execute: () {
         _addBossAttackAnimation();
       },

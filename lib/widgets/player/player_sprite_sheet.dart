@@ -3,7 +3,7 @@ import 'package:bonfire/bonfire.dart';
 class PlayerSpriteSheet {
   //Idle
   static Future<SpriteAnimation> get playerIdleLeft => SpriteAnimation.load(
-        'hero/Idle_left.png',
+        'hero/warrior/Idle_left.png',
         SpriteAnimationData.sequenced(
           amount: 8,
           stepTime: 0.15,
@@ -11,7 +11,7 @@ class PlayerSpriteSheet {
         ),
       );
   static Future<SpriteAnimation> get playerIdleRight => SpriteAnimation.load(
-        'hero/Idle_right.png',
+        'hero/warrior/Idle_right.png',
         SpriteAnimationData.sequenced(
           amount: 4,
           stepTime: 0.15,
@@ -20,25 +20,25 @@ class PlayerSpriteSheet {
       );
 //Run
   static Future<SpriteAnimation> get playerRunLeft => SpriteAnimation.load(
-        'hero/Run_left.png',
+        'hero/warrior/Run_left.png',
         SpriteAnimationData.sequenced(
           amount: 8,
-          stepTime: 0.15,
+          stepTime: 0.13,
           textureSize: Vector2(150, 150),
         ),
       );
   static Future<SpriteAnimation> get playerRunRight => SpriteAnimation.load(
-        'hero/Run_right.png',
+        'hero/warrior/Run_right.png',
         SpriteAnimationData.sequenced(
           amount: 4,
-          stepTime: 0.15,
+          stepTime: 0.13,
           textureSize: Vector2(150, 150),
         ),
       );
 
   //Atack
   static Future<SpriteAnimation> get attackRight => SpriteAnimation.load(
-        'hero/Attack1_right.png',
+        'hero/warrior/Attack1_right.png',
         SpriteAnimationData.sequenced(
           amount: 3,
           stepTime: 0.15,
@@ -46,7 +46,7 @@ class PlayerSpriteSheet {
         ),
       );
   static Future<SpriteAnimation> get attackLeft => SpriteAnimation.load(
-        'hero/Attack1_left.png',
+        'hero/warrior/Attack1_left.png',
         SpriteAnimationData.sequenced(
           amount: 3,
           stepTime: 0.15,
@@ -56,7 +56,7 @@ class PlayerSpriteSheet {
 
   //Take hit
   static Future<SpriteAnimation> get takeHitRight => SpriteAnimation.load(
-        'hero/Take_hit_right.png',
+        'hero/warrior/Take_hit_right.png',
         SpriteAnimationData.sequenced(
           amount: 4,
           stepTime: 0.15,
@@ -64,7 +64,7 @@ class PlayerSpriteSheet {
         ),
       );
   static Future<SpriteAnimation> get takeHitLeft => SpriteAnimation.load(
-        'hero/Take_hit_left.png',
+        'hero/warrior/Take_hit_left.png',
         SpriteAnimationData.sequenced(
           amount: 4,
           stepTime: 0.15,
@@ -119,7 +119,7 @@ class PlayerSpriteSheet {
 
   //Dying
   static Future<SpriteAnimation> get dyingLeft => SpriteAnimation.load(
-        'hero/Death_left.png',
+        'hero/warrior/Death_left.png',
         SpriteAnimationData.sequenced(
           amount: 6,
           stepTime: 0.25,
@@ -127,7 +127,7 @@ class PlayerSpriteSheet {
         ),
       );
   static Future<SpriteAnimation> get dyingRight => SpriteAnimation.load(
-        'hero/Death_right.png',
+        'hero/warrior/Death_right.png',
         SpriteAnimationData.sequenced(
           amount: 6,
           stepTime: 0.25,
