@@ -394,13 +394,13 @@
         {
          "draworder":"topdown",
          "id":8,
-         "name":"enemy1",
+         "name":"firer",
          "objects":[
                 {
                  "class":"",
                  "height":0,
                  "id":4,
-                 "name":"enemy1",
+                 "name":"firer",
                  "rotation":0,
                  "visible":true,
                  "width":0,
@@ -412,9 +412,64 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":9,
+         "name":"canine",
+         "objects":[
+                {
+                 "class":"",
+                 "height":16,
+                 "id":5,
+                 "name":"canine",
+                 "rotation":0,
+                 "visible":true,
+                 "width":16,
+                 "x":279.5,
+                 "y":184
+                }, 
+                {
+                 "class":"",
+                 "height":16,
+                 "id":9,
+                 "name":"canine",
+                 "rotation":0,
+                 "visible":true,
+                 "width":16,
+                 "x":467,
+                 "y":189.5
+                }, 
+                {
+                 "class":"",
+                 "height":16,
+                 "id":10,
+                 "name":"canine",
+                 "rotation":0,
+                 "visible":true,
+                 "width":16,
+                 "x":215.5,
+                 "y":293.5
+                }, 
+                {
+                 "class":"",
+                 "height":16,
+                 "id":11,
+                 "name":"canine",
+                 "rotation":0,
+                 "visible":true,
+                 "width":16,
+                 "x":440.5,
+                 "y":236
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":9,
- "nextobjectid":5,
+ "nextlayerid":10,
+ "nextobjectid":12,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.1",
