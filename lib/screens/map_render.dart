@@ -33,7 +33,6 @@ class _MapRenderState extends State<MapRender> {
       ),
       actions: [
         JoystickAction(
-          
           actionId: 0,
           sprite: Sprite.load('decoration/joystick_atack.png'),
           spritePressed: Sprite.load('decoration/joystick_atack_selected.png'),
@@ -86,6 +85,26 @@ class _MapRenderState extends State<MapRender> {
           ),
           //Joystick
           joystick: joystick,
+
+          lightingColorGame: Colors.black.withOpacity(0.2),
+          background: BackgroundColorGame(Colors.grey[900]!),
+          progress: Scaffold(
+            body: Container(
+              color: Colors.black,
+              child: const Center(
+                child: Text(
+                  "Carregando...",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontStyle: FontStyle.italic,
+                    fontFamily: 'PressStart2P-Regular',
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+            ),
+          ),
         ),
       ),
     );

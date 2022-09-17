@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(fontFamily: 'PressStart2P'),
+      theme: ThemeData(fontFamily: 'PressStart2P',),
       debugShowCheckedModeBanner: false,
       home: const MapRender(),
     );
