@@ -6,8 +6,7 @@ import 'package:ng_bonfire/widgets/enemies/canine/canine_sprite_sheet.dart';
 
 const tileSize = BasicValues.TILE_SIZE;
 
-class Canine extends SimpleEnemy
-    with ObjectCollision, AutomaticRandomMovement {
+class Canine extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
   bool canMove = true;
   Canine({required Vector2 position})
       : super(
@@ -28,7 +27,7 @@ class Canine extends SimpleEnemy
         collisions: [
           CollisionArea.rectangle(
             size: Vector2(25, 20),
-            align: Vector2(16, 27),
+            align: Vector2(17, 20),
           ),
         ],
       ),
@@ -100,7 +99,6 @@ class Canine extends SimpleEnemy
     super.receiveDamage(attacker, damage, identify);
   }
 
-  
   void _execAttack() {
     simpleAttackMelee(
       withPush: false,
@@ -112,7 +110,6 @@ class Canine extends SimpleEnemy
       },
     );
   }
-
 
 //Attack animation
 

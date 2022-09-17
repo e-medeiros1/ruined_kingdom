@@ -51,27 +51,23 @@ class Super extends SimplePlayer with ObjectCollision {
     if (isDead || lockMove) return;
     if (event.id == 0 && event.event == ActionEvent.DOWN) {
       _addAttackAnimation();
-      await Future.delayed(const Duration(milliseconds: 500));
       _meleeAttack();
     }
 
     if (event.id == LogicalKeyboardKey.space.keyId &&
         event.event == ActionEvent.DOWN) {
       _addAttackAnimation();
-      await Future.delayed(const Duration(milliseconds: 500));
       _meleeAttack();
     }
 
     if (event.id == LogicalKeyboardKey.keyZ.keyId &&
         event.event == ActionEvent.DOWN) {
       _addRangeAttackAnimation();
-      await Future.delayed(const Duration(milliseconds: 500));
       _especialAttack();
     }
 
     if (event.id == 1 && event.event == ActionEvent.DOWN) {
       _addRangeAttackAnimation();
-      await Future.delayed(const Duration(milliseconds: 500));
       _especialAttack();
     }
     super.joystickAction(event);
@@ -91,7 +87,8 @@ class Super extends SimplePlayer with ObjectCollision {
   }
 
 //Normal Attack
-  _meleeAttack() {
+  _meleeAttack() async {
+    await Future.delayed(const Duration(milliseconds: 500));
     lockMove = true;
     simpleAttackMelee(
       damage: 25,
@@ -101,7 +98,8 @@ class Super extends SimplePlayer with ObjectCollision {
   }
 
 //Especial Attack
-  _especialAttack() {
+  _especialAttack() async {
+    await Future.delayed(const Duration(milliseconds: 500));
     lockMove = true;
     simpleAttackMelee(
         damage: 50,

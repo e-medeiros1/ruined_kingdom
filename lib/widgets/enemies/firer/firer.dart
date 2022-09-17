@@ -2,7 +2,6 @@ import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:ng_bonfire/utils/basic_value.dart';
 import 'package:ng_bonfire/widgets/enemies/firer/firer_sprite_sheet.dart';
-// import 'dart:io' show Platform;
 
 const tileSize = BasicValues.TILE_SIZE;
 
@@ -27,8 +26,8 @@ class Firer extends SimpleEnemy
       CollisionConfig(
         collisions: [
           CollisionArea.rectangle(
-             size: Vector2(32, 45),
-            align: Vector2(145, 170),
+             size: Vector2(32, 55),
+            align: Vector2(145, 150),
           ),
         ],
       ),
@@ -60,7 +59,6 @@ class Firer extends SimpleEnemy
       seePlayer(
         observed: (player) {
           seeAndMoveToPlayer(
-            // Quando tiver próximo do player, faz:
             closePlayer: (player) {
               followComponent(
                 margin: tileSize,
@@ -112,7 +110,6 @@ class Firer extends SimpleEnemy
   }
 
 //Attack animation
-
   void _addBossAttackAnimation() {
     canMove = false;
     Future<SpriteAnimation> newAnimation;
@@ -214,7 +211,6 @@ class Firer extends SimpleEnemy
 
 
 //Death
-  //Die
   @override
   void die() {
     if (gameRef.player!.lastDirectionHorizontal == Direction.left) {

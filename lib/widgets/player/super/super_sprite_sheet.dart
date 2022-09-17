@@ -41,7 +41,7 @@ class SuperSpriteSheet {
         'hero/super/Attack1_right.png',
         SpriteAnimationData.sequenced(
           amount: 7,
-          stepTime: 0.1,
+          stepTime: 0.12,
           textureSize: Vector2(162, 162),
         ),
       );
@@ -49,7 +49,7 @@ class SuperSpriteSheet {
         'hero/super/Attack1_left.png',
         SpriteAnimationData.sequenced(
           amount: 7,
-          stepTime: 0.1,
+          stepTime: 0.12,
           textureSize: Vector2(162, 162),
         ),
       );
@@ -57,7 +57,7 @@ class SuperSpriteSheet {
         'hero/super/Attack3_right.png',
         SpriteAnimationData.sequenced(
           amount: 8,
-          stepTime: 0.15,
+          stepTime: 0.13,
           textureSize: Vector2(162, 162),
         ),
       );
@@ -65,7 +65,7 @@ class SuperSpriteSheet {
         'hero/super/Attack3_left.png',
         SpriteAnimationData.sequenced(
           amount: 8,
-          stepTime: 0.15,
+          stepTime: 0.13,
           textureSize: Vector2(162, 162),
         ),
       );

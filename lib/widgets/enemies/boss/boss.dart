@@ -2,8 +2,6 @@ import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:ng_bonfire/utils/basic_value.dart';
 import 'package:ng_bonfire/widgets/enemies/boss/boss_sprite_sheet.dart';
-// import 'dart:io' show Platform;
-
 const tileSize = BasicValues.TILE_SIZE;
 
 class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
@@ -13,7 +11,7 @@ class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
           life: 300,
           position: position,
           speed: 50,
-          size: Vector2(tileSize * 8, tileSize * 8),
+          size: Vector2(tileSize * 8.5, tileSize * 8.5),
           animation: SimpleDirectionAnimation(
             idleRight: BossSpriteSheet.bossIdleRight,
             idleLeft: BossSpriteSheet.bossIdleLeft,
@@ -26,9 +24,8 @@ class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
       CollisionConfig(
         collisions: [
           CollisionArea.rectangle(
-            size: Vector2(16, 30),
-            align: Vector2(120, 140),
-           
+            size: Vector2(16, 32),
+            align: Vector2(125, 140),
           ),
         ],
       ),
@@ -60,7 +57,6 @@ class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
       seePlayer(
         observed: (player) {
           seeAndMoveToPlayer(
-            // Quando tiver próximo do player, faz:
             closePlayer: (player) {
               followComponent(
                 margin: tileSize,
@@ -88,7 +84,7 @@ class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
         -damage,
         initVelocityTop: -2,
         config: TextStyle(
-          color: Colors.red.shade200,
+          color: Colors.purple.shade200,
           fontSize: tileSize / 2,
         ),
       );
@@ -96,7 +92,7 @@ class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
     super.receiveDamage(attacker, damage, identify);
   }
 
-    void _execAttack() {
+  void _execAttack() {
     simpleAttackMelee(
       damage: 30,
       size: Vector2.all(tileSize * 2),
