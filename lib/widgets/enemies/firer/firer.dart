@@ -11,7 +11,7 @@ class Firer extends SimpleEnemy
   bool canMove = true;
   Firer({required Vector2 position})
       : super(
-          life: 500,
+          life: 600,
           position: position,
           speed: 70,
           size: Vector2(tileSize * 10, tileSize * 10),
@@ -75,8 +75,6 @@ class Firer extends SimpleEnemy
           );
         },
         notObserved: () {
-          // runRandomMovement(dt,
-          //     maxDistance: 2, runOnlyVisibleInCamera: false, speed: 20);
         },
         radiusVision: tileSize * 6,
       );
@@ -106,7 +104,7 @@ class Firer extends SimpleEnemy
       withPush: false,
       damage: 30,
       size: Vector2.all(tileSize),
-      interval: 600,
+      interval: 500,
       execute: () {
         _addBossAttackAnimation();
       },

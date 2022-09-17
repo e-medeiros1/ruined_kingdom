@@ -40,10 +40,10 @@ class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
   void render(Canvas canvas) {
     drawDefaultLifeBar(
       canvas,
-      width: 30,
+      width: 35,
       borderWidth: 1.5,
       height: 5,
-      align: const Offset(110, -100),
+      align: const Offset(110, -90),
       borderRadius: BorderRadius.circular(3),
       borderColor: Colors.black87,
       colorsLife: [
@@ -74,10 +74,6 @@ class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
             margin: tileSize,
           );
         },
-        // notObserved: () {
-        //   runRandomMovement(dt,
-        //       maxDistance: 10, runOnlyVisibleInCamera: true, speed: 20);
-        // },
         radiusVision: tileSize * 8,
       );
     }
@@ -100,8 +96,18 @@ class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
     super.receiveDamage(attacker, damage, identify);
   }
 
-//Attack animation
+    void _execAttack() {
+    simpleAttackMelee(
+      damage: 30,
+      size: Vector2.all(tileSize * 2),
+      interval: 800,
+      execute: () {
+        _addBossAttackAnimation();
+      },
+    );
+  }
 
+//Attack animation
   void _addBossAttackAnimation() {
     canMove = false;
     Future<SpriteAnimation> newAnimation;
@@ -201,18 +207,6 @@ class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
     );
   }
 
-  void _execAttack() {
-    simpleAttackMelee(
-      damage: 50,
-      size: Vector2.all(tileSize * 2),
-      interval: 800,
-      execute: () {
-        _addBossAttackAnimation();
-      },
-    );
-  }
-
-//Death
   //Die
   @override
   void die() {

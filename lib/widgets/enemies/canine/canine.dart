@@ -27,7 +27,7 @@ class Canine extends SimpleEnemy
       CollisionConfig(
         collisions: [
           CollisionArea.rectangle(
-            size: Vector2(25, 15),
+            size: Vector2(25, 20),
             align: Vector2(16, 27),
           ),
         ],
