@@ -69,7 +69,7 @@ flutter:
     - assets/images/enemies/canine/
     - assets/images/hero/
     - assets/images/hero/warrior/
-    - assets/images/hero/huntress/
+    - assets/images/hero/super/
   
 
   # An image asset can refer to one or more resolution-specific "variants", see

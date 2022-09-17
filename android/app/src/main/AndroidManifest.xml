@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.erimedeiros.ng_bonfire">
    <application
-        android:label="ng_bonfire"
+        android:label="Ruined Kingdom"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
