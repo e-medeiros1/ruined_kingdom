@@ -2,7 +2,7 @@ import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ng_bonfire/screens/map_render.dart';
-import 'package:ng_bonfire/widgets/player/player_sprite_sheet.dart';
+import 'package:ng_bonfire/widgets/player/warrior/warrior_sprite_sheet.dart';
 
 class GamePlayer extends SimplePlayer with ObjectCollision {
   bool lockMove = false;

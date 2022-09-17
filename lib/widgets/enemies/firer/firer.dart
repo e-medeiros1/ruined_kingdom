@@ -11,10 +11,10 @@ class Firer extends SimpleEnemy
   bool canMove = true;
   Firer({required Vector2 position})
       : super(
-          life: 300,
+          life: 500,
           position: position,
           speed: 70,
-          size: Vector2(tileSize * 6, tileSize * 6),
+          size: Vector2(tileSize * 10, tileSize * 10),
           animation: SimpleDirectionAnimation(
             idleRight: FirerSpriteSheet.firerIdleRight,
             idleLeft: FirerSpriteSheet.firerIdleLeft,
@@ -27,8 +27,8 @@ class Firer extends SimpleEnemy
       CollisionConfig(
         collisions: [
           CollisionArea.rectangle(
-            size: Vector2(16, 30),
-            align: Vector2(88, 100),
+             size: Vector2(32, 45),
+            align: Vector2(145, 170),
           ),
         ],
       ),
@@ -40,10 +40,10 @@ class Firer extends SimpleEnemy
   void render(Canvas canvas) {
     drawDefaultLifeBar(
       canvas,
-      width: 50,
+      width: 60,
       borderWidth: 1.5,
       height: 5,
-      align: const Offset(90, -60),
+      align: const Offset(120, -80),
       borderRadius: BorderRadius.circular(3),
       borderColor: Colors.black87,
       colorsLife: [
@@ -98,6 +98,19 @@ class Firer extends SimpleEnemy
       );
     }
     super.receiveDamage(attacker, damage, identify);
+  }
+
+  
+  void _execAttack() {
+    simpleAttackMelee(
+      withPush: false,
+      damage: 30,
+      size: Vector2.all(tileSize),
+      interval: 600,
+      execute: () {
+        _addBossAttackAnimation();
+      },
+    );
   }
 
 //Attack animation
@@ -201,17 +214,6 @@ class Firer extends SimpleEnemy
     );
   }
 
-  void _execAttack() {
-    simpleAttackMelee(
-      withPush: false,
-      damage: 15,
-      size: Vector2.all(tileSize),
-      interval: 200,
-      execute: () {
-        _addBossAttackAnimation();
-      },
-    );
-  }
 
 //Death
   //Die

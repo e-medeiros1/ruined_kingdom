@@ -72,51 +72,6 @@ class PlayerSpriteSheet {
         ),
       );
 
-  // static Future<SpriteAnimation> fireBallAttackRight() => SpriteAnimation.load(
-  //       'decoration/fireball_right.png',
-  //       SpriteAnimationData.sequenced(
-  //         amount: 3,
-  //         stepTime: 0.15,
-  //         textureSize: Vector2(23, 23),
-  //       ),
-  //     );
-
-  // static Future<SpriteAnimation> fireBallAttackLeft() => SpriteAnimation.load(
-  //       'decoration/fireball_left.png',
-  //       SpriteAnimationData.sequenced(
-  //         amount: 3,
-  //         stepTime: 0.15,
-  //         textureSize: Vector2(23, 23),
-  //       ),
-  //     );
-
-  // static Future<SpriteAnimation> fireBallAttackTop() => SpriteAnimation.load(
-  //       'decoration/fireball_top.png',
-  //       SpriteAnimationData.sequenced(
-  //         amount: 3,
-  //         stepTime: 0.15,
-  //         textureSize: Vector2(23, 23),
-  //       ),
-  //     );
-
-  // static Future<SpriteAnimation> fireBallAttackBottom() => SpriteAnimation.load(
-  //       'decoration/fireball_bottom.png',
-  //       SpriteAnimationData.sequenced(
-  //         amount: 3,
-  //         stepTime: 0.15,
-  //         textureSize: Vector2(23, 23),
-  //       ),
-  //     );
-
-  // static Future<SpriteAnimation> fireBallExplosion() => SpriteAnimation.load(
-  //       'decoration/explosion_fire.png',
-  //       SpriteAnimationData.sequenced(
-  //         amount: 6,
-  //         stepTime: 0.15,
-  //         textureSize: Vector2(32, 32),
-  //       ),
-  //     );
-
   //Dying
   static Future<SpriteAnimation> get dyingLeft => SpriteAnimation.load(
         'hero/warrior/Death_left.png',

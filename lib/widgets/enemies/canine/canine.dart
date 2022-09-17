@@ -100,6 +100,20 @@ class Canine extends SimpleEnemy
     super.receiveDamage(attacker, damage, identify);
   }
 
+  
+  void _execAttack() {
+    simpleAttackMelee(
+      withPush: false,
+      damage: 15,
+      size: Vector2.all(tileSize),
+      interval: 300,
+      execute: () {
+        _addBossAttackAnimation();
+      },
+    );
+  }
+
+
 //Attack animation
 
   void _addBossAttackAnimation() {
@@ -197,18 +211,6 @@ class Canine extends SimpleEnemy
       runToTheEnd: true,
       onFinish: () {
         canMove = true;
-      },
-    );
-  }
-
-  void _execAttack() {
-    simpleAttackMelee(
-      withPush: false,
-      damage: 15,
-      size: Vector2.all(tileSize),
-      interval: 100,
-      execute: () {
-        _addBossAttackAnimation();
       },
     );
   }

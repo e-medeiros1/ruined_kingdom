@@ -10,10 +10,10 @@ class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
   bool canMove = true;
   Boss({required Vector2 position})
       : super(
-          life: 500,
+          life: 300,
           position: position,
           speed: 50,
-          size: Vector2(64 * 5.5, 64 * 5.5),
+          size: Vector2(tileSize * 8, tileSize * 8),
           animation: SimpleDirectionAnimation(
             idleRight: BossSpriteSheet.bossIdleRight,
             idleLeft: BossSpriteSheet.bossIdleLeft,
@@ -26,8 +26,9 @@ class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
       CollisionConfig(
         collisions: [
           CollisionArea.rectangle(
-            size: Vector2(32, 45),
-            align: Vector2(155, 195),
+            size: Vector2(16, 30),
+            align: Vector2(120, 140),
+           
           ),
         ],
       ),
@@ -39,10 +40,10 @@ class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
   void render(Canvas canvas) {
     drawDefaultLifeBar(
       canvas,
-      width: 70,
+      width: 30,
       borderWidth: 1.5,
       height: 5,
-      align: const Offset(150, -120),
+      align: const Offset(110, -100),
       borderRadius: BorderRadius.circular(3),
       borderColor: Colors.black87,
       colorsLife: [
