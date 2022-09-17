@@ -6,8 +6,8 @@ import 'package:ng_bonfire/utils/basic_value.dart';
 import 'package:ng_bonfire/widgets/enemies/boss/boss.dart';
 import 'package:ng_bonfire/widgets/enemies/canine/canine.dart';
 import 'package:ng_bonfire/widgets/enemies/firer/firer.dart';
-import 'package:ng_bonfire/widgets/player/huntress/huntress.dart';
-import 'package:ng_bonfire/widgets/player/warrior/warrior.dart';
+import 'package:ng_bonfire/widgets/player/super/super.dart';
+import 'dart:io' show Platform;
 
 const double tileSize = BasicValues.TILE_SIZE;
 
@@ -33,6 +33,7 @@ class _MapRenderState extends State<MapRender> {
       ),
       actions: [
         JoystickAction(
+          
           actionId: 0,
           sprite: Sprite.load('decoration/joystick_atack.png'),
           spritePressed: Sprite.load('decoration/joystick_atack_selected.png'),
@@ -49,35 +50,34 @@ class _MapRenderState extends State<MapRender> {
         )
       ],
     );
-
-    joystick = Joystick(
-      keyboardConfig: KeyboardConfig(
-        keyboardDirectionalType: KeyboardDirectionalType.wasdAndArrows,
-        acceptedKeys: [
-          LogicalKeyboardKey.space,
-          LogicalKeyboardKey.keyZ,
-        ],
-      ),
-    );
-
+    if (Platform.isWindows) {
+      joystick = Joystick(
+        keyboardConfig: KeyboardConfig(
+          enable: true,
+          keyboardDirectionalType: KeyboardDirectionalType.wasdAndArrows,
+          acceptedKeys: [
+            LogicalKeyboardKey.space,
+            LogicalKeyboardKey.keyZ,
+          ],
+        ),
+      );
+    }
     return Center(
       child: SizedBox(
         width: sizeScreen,
         height: sizeScreen,
         child: BonfireWidget(
-          showCollisionArea: true,
+          showCollisionArea: false,
           map: WorldMapByTiled(
             'map/gamemap.json',
             forceTileSize: Vector2.all(tileSize),
             objectsBuilder: {
-              'boss': (properties) => Boss(
-                    position: properties.position,
-                  ),
+              'boss': (properties) => Boss(position: properties.position),
               'firer': (properties) => Firer(position: properties.position),
               'canine': (properties) => Canine(position: properties.position),
             },
           ),
-          player: Huntress(position: Vector2(tileSize * 20, tileSize * 31)),
+          player: Super(position: Vector2(tileSize * 20, tileSize * 31)),
           //Camera
           cameraConfig: CameraConfig(
             moveOnlyMapArea: false,
