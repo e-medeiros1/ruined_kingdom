@@ -2,8 +2,9 @@
 
 
 <p align="center">
-      <img src="https://user-images.githubusercontent.com/73318684/190868934-b904ceff-46ee-4cf5-b796-151fb8d1e484.png" width="150" alt="Resultado"/>
+      <img src="https://user-images.githubusercontent.com/73318684/191071376-88868e4d-54e0-4e94-8d0c-73a5cafec2d2.png" width="200" alt="Resultado"/>
 </p>
+
 
 
 <h2> Versão demo Android </h2>  
@@ -20,22 +21,3 @@ No desktop, use a barra de espaço para atacar, setas e WASD disponíveis
 
 Mate todos os inimigos para vencer
  
-
-
-<h2> Como usar </h2>
-<h3> Disponível para windows e android </h3>
-
-   ```
-   - Com o git instalado no computador, clone o repositório usando o:
-   $ git clone https://github.com/e-medeiros1/ruined_kingdom.git 
-   - Entre no diretório com:
-   $ cd .\ruined_kingdom
-   - Vá para o VSCode com: 
-   $ code .
-   - Obtenha os packages:
-   $ flutter pub get  
-   - Finalmente rode o jogo no dispositivo desejado:
-   $ flutter run  
-   ```
-
-   ---  
