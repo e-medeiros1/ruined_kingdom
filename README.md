@@ -21,22 +21,3 @@ No desktop, use a barra de espaço para atacar, setas e WASD disponíveis
 
 Mate todos os inimigos para vencer
  
-
-
-<h2> Como usar </h2>
-<h3> Disponível para windows e android </h3>
-
-   ```
-   - Com o git instalado no computador, clone o repositório usando o:
-   $ git clone https://github.com/e-medeiros1/ruined_kingdom.git 
-   - Entre no diretório com:
-   $ cd .\ruined_kingdom
-   - Vá para o VSCode com: 
-   $ code .
-   - Obtenha os packages:
-   $ flutter pub get  
-   - Finalmente rode o jogo no dispositivo desejado:
-   $ flutter run  
-   ```
-
-   ---  
