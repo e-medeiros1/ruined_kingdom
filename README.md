@@ -2,8 +2,9 @@
 
 
 <p align="center">
-      <img src="https://user-images.githubusercontent.com/73318684/190868934-b904ceff-46ee-4cf5-b796-151fb8d1e484.png" width="150" alt="Resultado"/>
+      <img src="https://user-images.githubusercontent.com/73318684/191071376-88868e4d-54e0-4e94-8d0c-73a5cafec2d2.png" width="200" alt="Resultado"/>
 </p>
+
 
 
 <h2> Versão demo Android </h2>  
