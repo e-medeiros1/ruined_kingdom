@@ -10,7 +10,7 @@ class Super extends SimplePlayer with ObjectCollision {
       : super(
           position: position,
           speed: 180,
-          size: Vector2(tileSize * 6, tileSize * 6),
+          size: Vector2(tileSize * 7, tileSize * 7),
           life: 200,
           animation: SimpleDirectionAnimation(
             idleRight: SuperSpriteSheet.superIdleRight,
@@ -24,8 +24,8 @@ class Super extends SimplePlayer with ObjectCollision {
       CollisionConfig(
         collisions: [
           CollisionArea.rectangle(
-            size: Vector2(16, 27),
-            align: Vector2(90, 92),
+            size: Vector2(16, 35),
+            align: Vector2(100, 105),
           ),
         ],
       ),
@@ -50,24 +50,32 @@ class Super extends SimplePlayer with ObjectCollision {
   void joystickAction(JoystickActionEvent event) async {
     if (isDead || lockMove) return;
     if (event.id == 0 && event.event == ActionEvent.DOWN) {
-      _addAttackAnimation();
+      _addAttackAnimation(() {
+        lockMove = false;
+      });
       _meleeAttack();
     }
 
     if (event.id == LogicalKeyboardKey.space.keyId &&
         event.event == ActionEvent.DOWN) {
-      _addAttackAnimation();
+      _addAttackAnimation(() {
+        lockMove = false;
+      });
       _meleeAttack();
     }
 
     if (event.id == LogicalKeyboardKey.keyZ.keyId &&
         event.event == ActionEvent.DOWN) {
-      _addRangeAttackAnimation();
+      _addRangeAttackAnimation(() {
+        lockMove = false;
+      });
       _especialAttack();
     }
 
     if (event.id == 1 && event.event == ActionEvent.DOWN) {
-      _addRangeAttackAnimation();
+      _addRangeAttackAnimation(() {
+        lockMove = false;
+      });
       _especialAttack();
     }
     super.joystickAction(event);
@@ -88,8 +96,9 @@ class Super extends SimplePlayer with ObjectCollision {
 
 //Normal Attack
   _meleeAttack() async {
-    await Future.delayed(const Duration(milliseconds: 500));
     lockMove = true;
+    idle();
+    await Future.delayed(const Duration(milliseconds: 500));
     simpleAttackMelee(
       damage: 25,
       size: Vector2.all(tileSize),
@@ -99,8 +108,10 @@ class Super extends SimplePlayer with ObjectCollision {
 
 //Especial Attack
   _especialAttack() async {
-    await Future.delayed(const Duration(milliseconds: 500));
     lockMove = true;
+    idle();
+    await Future.delayed(const Duration(milliseconds: 500));
+
     simpleAttackMelee(
         damage: 50,
         size: Vector2.all(tileSize),
@@ -109,7 +120,7 @@ class Super extends SimplePlayer with ObjectCollision {
   }
 
 //Range atack
-  void _addRangeAttackAnimation() {
+  void _addRangeAttackAnimation(VoidCallback onFinish) {
     Future<SpriteAnimation> newAnimation;
     switch (lastDirectionHorizontal) {
       case Direction.left:
@@ -155,7 +166,7 @@ class Super extends SimplePlayer with ObjectCollision {
   }
 
 //Attack animation
-  void _addAttackAnimation() {
+  void _addAttackAnimation(VoidCallback onFinish) {
     lockMove = true;
     Future<SpriteAnimation> newAnimation;
     switch (lastDirection) {

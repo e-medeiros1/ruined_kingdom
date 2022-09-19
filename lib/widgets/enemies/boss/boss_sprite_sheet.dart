@@ -60,7 +60,7 @@ class BossSpriteSheet {
         'enemies/boss/Attack2_right.png',
         SpriteAnimationData.sequenced(
           amount: 8,
-          stepTime: 0.15,
+          stepTime: 0.1,
           textureSize: Vector2(250, 250),
         ),
       );
@@ -68,7 +68,7 @@ class BossSpriteSheet {
         'enemies/boss/Attack2_left.png',
         SpriteAnimationData.sequenced(
           amount: 8,
-          stepTime: 0.15,
+          stepTime: 0.1,
           textureSize: Vector2(250, 250),
         ),
       );

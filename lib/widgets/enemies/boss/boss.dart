@@ -11,7 +11,7 @@ class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
           life: 300,
           position: position,
           speed: 50,
-          size: Vector2(tileSize * 8.5, tileSize * 8.5),
+          size: Vector2(tileSize * 10, tileSize * 10),
           animation: SimpleDirectionAnimation(
             idleRight: BossSpriteSheet.bossIdleRight,
             idleLeft: BossSpriteSheet.bossIdleLeft,
@@ -24,8 +24,8 @@ class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
       CollisionConfig(
         collisions: [
           CollisionArea.rectangle(
-            size: Vector2(16, 32),
-            align: Vector2(125, 140),
+            size: Vector2(18, 40),
+            align: Vector2(145, 170),
           ),
         ],
       ),
@@ -82,7 +82,8 @@ class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
       _addDamageAnimation();
       showDamage(
         -damage,
-        initVelocityTop: -2,
+        initVelocityTop: -5,
+        maxDownSize: 20,
         config: TextStyle(
           color: Colors.purple.shade200,
           fontSize: tileSize / 2,
