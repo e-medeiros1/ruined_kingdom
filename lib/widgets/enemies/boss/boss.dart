@@ -2,6 +2,7 @@ import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:ng_bonfire/utils/basic_value.dart';
 import 'package:ng_bonfire/widgets/enemies/boss/boss_sprite_sheet.dart';
+
 const tileSize = BasicValues.TILE_SIZE;
 
 class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
@@ -37,10 +38,10 @@ class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
   void render(Canvas canvas) {
     drawDefaultLifeBar(
       canvas,
-      width: 35,
+      width: 55,
       borderWidth: 1.5,
       height: 5,
-      align: const Offset(110, -90),
+      align: const Offset(110, -110),
       borderRadius: BorderRadius.circular(3),
       borderColor: Colors.black87,
       colorsLife: [

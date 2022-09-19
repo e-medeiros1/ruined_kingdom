@@ -39,10 +39,10 @@ class Ghost extends SimpleEnemy
   void render(Canvas canvas) {
     drawDefaultLifeBar(
       canvas,
-      width: 60,
+      width: 55,
       borderWidth: 1.5,
       height: 5,
-      align: const Offset(120, -80),
+      align: const Offset(105, -50),
       borderRadius: BorderRadius.circular(3),
       borderColor: Colors.black87,
       colorsLife: [

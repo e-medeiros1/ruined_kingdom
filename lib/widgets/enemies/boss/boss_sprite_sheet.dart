@@ -24,7 +24,7 @@ class BossSpriteSheet {
         'enemies/boss/Run_left.png',
         SpriteAnimationData.sequenced(
             amount: 8,
-            stepTime: 0.25,
+            stepTime: 0.15,
             textureSize: Vector2(250, 250),
             texturePosition: Vector2(0, 0)),
       );
@@ -32,7 +32,7 @@ class BossSpriteSheet {
         'enemies/boss/Run_right.png',
         SpriteAnimationData.sequenced(
             amount: 8,
-            stepTime: 0.25,
+            stepTime: 0.15,
             textureSize: Vector2(250, 250),
             texturePosition: Vector2(0, 0)),
       );
@@ -73,7 +73,7 @@ class BossSpriteSheet {
         ),
       );
 
-      //Take hit
+  //Take hit
   static Future<SpriteAnimation> get takeHitRight => SpriteAnimation.load(
         'enemies/boss/Take_hit_right.png',
         SpriteAnimationData.sequenced(
@@ -90,5 +90,4 @@ class BossSpriteSheet {
           textureSize: Vector2(250, 250),
         ),
       );
-
 }

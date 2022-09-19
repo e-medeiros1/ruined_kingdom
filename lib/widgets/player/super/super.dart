@@ -37,10 +37,10 @@ class Super extends SimplePlayer with ObjectCollision {
   void render(Canvas canvas) {
     drawDefaultLifeBar(
       canvas,
-      width: 39,
+      width: 45,
       borderWidth: 1,
       height: 4,
-      align: const Offset(75, -50),
+      align: const Offset(90, -55),
       borderRadius: BorderRadius.circular(3),
     );
     super.render(canvas);
@@ -111,10 +111,9 @@ class Super extends SimplePlayer with ObjectCollision {
     lockMove = true;
     idle();
     await Future.delayed(const Duration(milliseconds: 500));
-
     simpleAttackMelee(
         damage: 50,
-        size: Vector2.all(tileSize),
+        size: Vector2.all(tileSize + 10),
         withPush: true,
         sizePush: tileSize / 3);
   }

@@ -39,7 +39,7 @@ class Canine extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
   void render(Canvas canvas) {
     drawDefaultLifeBar(
       canvas,
-      width: 25,
+      width: 35,
       borderWidth: 1.5,
       height: 4,
       align: const Offset(25, -10),
