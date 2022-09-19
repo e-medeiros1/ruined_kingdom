@@ -6,6 +6,7 @@ import 'package:ng_bonfire/utils/basic_value.dart';
 import 'package:ng_bonfire/widgets/enemies/boss/boss.dart';
 import 'package:ng_bonfire/widgets/enemies/canine/canine.dart';
 import 'package:ng_bonfire/widgets/enemies/firer/firer.dart';
+import 'package:ng_bonfire/widgets/enemies/ghost/ghost.dart';
 import 'package:ng_bonfire/widgets/player/super/super.dart';
 import 'dart:io' show Platform;
 
@@ -74,6 +75,7 @@ class _MapRenderState extends State<MapRender> {
               'boss': (properties) => Boss(position: properties.position),
               'firer': (properties) => Firer(position: properties.position),
               'canine': (properties) => Canine(position: properties.position),
+              'ghost': (properties) => Ghost(position: properties.position),
             },
           ),
           player: Super(position: Vector2(tileSize * 20, tileSize * 31)),
