@@ -2,6 +2,7 @@ import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:ng_bonfire/utils/basic_value.dart';
 import 'package:ng_bonfire/widgets/enemies/boss/boss_sprite_sheet.dart';
+import 'package:ng_bonfire/widgets/enemies/ghost/ghost_sprite_sheet.dart';
 
 const tileSize = BasicValues.TILE_SIZE;
 
@@ -9,10 +10,11 @@ class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
   bool canMove = true;
   Boss({required Vector2 position})
       : super(
-          life: 300,
+          life: 400,
           position: position,
-          speed: 50,
-          size: Vector2(tileSize * 10, tileSize * 10),
+          initDirection: Direction.left,
+          speed: 90,
+          size: Vector2(tileSize * 7, tileSize * 7),
           animation: SimpleDirectionAnimation(
             idleRight: BossSpriteSheet.bossIdleRight,
             idleLeft: BossSpriteSheet.bossIdleLeft,
@@ -25,8 +27,8 @@ class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
       CollisionConfig(
         collisions: [
           CollisionArea.rectangle(
-            size: Vector2(18, 40),
-            align: Vector2(145, 170),
+            size: Vector2(35, 45),
+            align: Vector2(100, 105),
           ),
         ],
       ),
@@ -41,7 +43,7 @@ class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
       width: 55,
       borderWidth: 1.5,
       height: 5,
-      align: const Offset(110, -110),
+      align: const Offset(90, -40),
       borderRadius: BorderRadius.circular(3),
       borderColor: Colors.black87,
       colorsLife: [
@@ -67,10 +69,10 @@ class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
               );
             },
             radiusVision: tileSize * 8,
-            runOnlyVisibleInScreen: true,
-            margin: tileSize,
+            margin: tileSize * 2,
           );
         },
+        notObserved: () {},
         radiusVision: tileSize * 8,
       );
     }
@@ -83,10 +85,10 @@ class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
       _addDamageAnimation();
       showDamage(
         -damage,
-        initVelocityTop: -5,
+        initVelocityTop: -3,
         maxDownSize: 20,
         config: TextStyle(
-          color: Colors.purple.shade200,
+          color: Colors.blue.shade100,
           fontSize: tileSize / 2,
         ),
       );
@@ -96,9 +98,10 @@ class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
 
   void _execAttack() {
     simpleAttackMelee(
-      damage: 30,
+      withPush: false,
+      damage: 40,
       size: Vector2.all(tileSize * 2),
-      interval: 800,
+      interval: 600,
       execute: () {
         _addBossAttackAnimation();
       },
@@ -205,7 +208,7 @@ class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
     );
   }
 
-  //Die
+//Death
   @override
   void die() {
     if (gameRef.player!.lastDirectionHorizontal == Direction.left) {

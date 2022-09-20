@@ -73,11 +73,11 @@ class _MapRenderState extends State<MapRender> {
             'map/gamemap.json',
             forceTileSize: Vector2.all(tileSize),
             objectsBuilder: {
-              'boss': (properties) => Boss(position: properties.position),
               'firer': (properties) => Firer(position: properties.position),
               'canine': (properties) => Canine(position: properties.position),
               'ghost': (properties) => Ghost(position: properties.position),
               'deather': (properties) => Deather(position: properties.position),
+              'boss': (properties) => Boss(position: properties.position),
             },
           ),
           player: Super(position: Vector2(tileSize * 20, tileSize * 31)),
