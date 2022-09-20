@@ -34,7 +34,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  bonfire: ^2.10.3
+  bonfire: ^2.10.6
 
 dev_dependencies:
   flutter_test:
@@ -68,6 +68,7 @@ flutter:
     - assets/images/enemies/firer/
     - assets/images/enemies/canine/
     - assets/images/enemies/ghost/
+    - assets/images/enemies/deather/
     - assets/images/hero/
     - assets/images/hero/warrior/
     - assets/images/hero/super/
