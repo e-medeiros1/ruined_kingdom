@@ -89,7 +89,7 @@ class Canine extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
       _addDamageAnimation();
       showDamage(
         -damage,
-        initVelocityTop: -2,
+        initVelocityTop: -5,
         config: const TextStyle(
           color: Colors.white,
           fontSize: tileSize / 2,
@@ -99,7 +99,8 @@ class Canine extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
     super.receiveDamage(attacker, damage, identify);
   }
 
-  void _execAttack() {
+  void _execAttack() async {
+    await Future.delayed(const Duration(milliseconds: 500));
     simpleAttackMelee(
       withPush: false,
       damage: 15,

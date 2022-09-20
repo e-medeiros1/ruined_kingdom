@@ -64,16 +64,16 @@ class Super extends SimplePlayer with ObjectCollision {
       _meleeAttack();
     }
 
-    if (event.id == LogicalKeyboardKey.keyZ.keyId &&
+    if (event.id == LogicalKeyboardKey.keyX.keyId &&
         event.event == ActionEvent.DOWN) {
-      _addRangeAttackAnimation(() {
+      _addEspecialAttackAnimation(() {
         lockMove = false;
       });
       _especialAttack();
     }
 
     if (event.id == 1 && event.event == ActionEvent.DOWN) {
-      _addRangeAttackAnimation(() {
+      _addEspecialAttackAnimation(() {
         lockMove = false;
       });
       _especialAttack();
@@ -98,7 +98,7 @@ class Super extends SimplePlayer with ObjectCollision {
   _meleeAttack() async {
     lockMove = true;
     idle();
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future.delayed(const Duration(milliseconds: 300));
     simpleAttackMelee(
       damage: 25,
       size: Vector2.all(tileSize),
@@ -119,7 +119,7 @@ class Super extends SimplePlayer with ObjectCollision {
   }
 
 //Range atack
-  void _addRangeAttackAnimation(VoidCallback onFinish) {
+  void _addEspecialAttackAnimation(VoidCallback onFinish) {
     Future<SpriteAnimation> newAnimation;
     switch (lastDirectionHorizontal) {
       case Direction.left:

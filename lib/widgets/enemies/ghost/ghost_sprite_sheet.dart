@@ -25,7 +25,7 @@ class GhostSpriteSheet {
         'enemies/ghost/Run_left.png',
         SpriteAnimationData.sequenced(
             amount: 8,
-            stepTime: 0.25,
+            stepTime: 0.2,
             textureSize: Vector2(167, 167),
             ),
       );
@@ -33,7 +33,7 @@ class GhostSpriteSheet {
         'enemies/ghost/Run_right.png',
         SpriteAnimationData.sequenced(
             amount: 8,
-            stepTime: 0.25,
+            stepTime: 0.2,
             textureSize: Vector2(167, 167),
             ),
       );

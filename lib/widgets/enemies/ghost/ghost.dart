@@ -5,14 +5,14 @@ import 'package:ng_bonfire/widgets/enemies/ghost/ghost_sprite_sheet.dart';
 
 const tileSize = BasicValues.TILE_SIZE;
 
-class Ghost extends SimpleEnemy
-    with ObjectCollision, AutomaticRandomMovement {
+class Ghost extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
   bool canMove = true;
   Ghost({required Vector2 position})
       : super(
-          life: 300,
+          life: 400,
           position: position,
-          speed: 70,
+          initDirection: Direction.left,
+          speed: 90,
           size: Vector2(tileSize * 7, tileSize * 7),
           animation: SimpleDirectionAnimation(
             idleRight: GhostSpriteSheet.ghostIdleRight,
@@ -26,8 +26,8 @@ class Ghost extends SimpleEnemy
       CollisionConfig(
         collisions: [
           CollisionArea.rectangle(
-             size: Vector2(30, 45),
-            align: Vector2(115, 120),
+            size: Vector2(35, 45),
+            align: Vector2(110, 120),
           ),
         ],
       ),
@@ -42,7 +42,7 @@ class Ghost extends SimpleEnemy
       width: 55,
       borderWidth: 1.5,
       height: 5,
-      align: const Offset(105, -50),
+      align: const Offset(90, -50),
       borderRadius: BorderRadius.circular(3),
       borderColor: Colors.black87,
       colorsLife: [
@@ -67,14 +67,12 @@ class Ghost extends SimpleEnemy
                 closeComponent: (player) => _execAttack(),
               );
             },
-            radiusVision: tileSize * 6,
-            runOnlyVisibleInScreen: true,
-            margin: tileSize,
+            radiusVision: tileSize * 8,
+            margin: tileSize * 2,
           );
         },
-        notObserved: () {
-        },
-        radiusVision: tileSize * 6,
+        notObserved: () {},
+        radiusVision: tileSize * 8,
       );
     }
     super.update(dt);
@@ -86,7 +84,7 @@ class Ghost extends SimpleEnemy
       _addDamageAnimation();
       showDamage(
         -damage,
-        initVelocityTop: -5,
+        initVelocityTop: -3,
         maxDownSize: 20,
         config: TextStyle(
           color: Colors.blue.shade200,
@@ -97,13 +95,13 @@ class Ghost extends SimpleEnemy
     super.receiveDamage(attacker, damage, identify);
   }
 
-  
-  void _execAttack() {
+  void _execAttack() async {
+    await Future.delayed(const Duration(milliseconds: 1000));
     simpleAttackMelee(
       withPush: false,
       damage: 30,
-      size: Vector2.all(tileSize),
-      interval: 500,
+      size: Vector2.all(tileSize * 2),
+      interval: 900,
       execute: () {
         _addBossAttackAnimation();
       },
@@ -209,7 +207,6 @@ class Ghost extends SimpleEnemy
       },
     );
   }
-
 
 //Death
   @override

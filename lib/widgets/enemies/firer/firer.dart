@@ -97,7 +97,8 @@ class Firer extends SimpleEnemy
   }
 
   
-  void _execAttack() {
+  void _execAttack() async {
+    await Future.delayed(const Duration(milliseconds: 300));
     simpleAttackMelee(
       withPush: false,
       damage: 30,
