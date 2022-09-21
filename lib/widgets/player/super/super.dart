@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:ng_bonfire/screens/map_render.dart';
 import 'package:ng_bonfire/widgets/player/super/super_sprite_sheet.dart';
 
-class Super extends SimplePlayer with ObjectCollision {
+class Super extends SimplePlayer with ObjectCollision, Lighting {
   bool lockMove = false;
   Super({required Vector2 position})
       : super(
@@ -28,6 +28,14 @@ class Super extends SimplePlayer with ObjectCollision {
             align: Vector2(100, 105),
           ),
         ],
+      ),
+    );
+    setupLighting(
+      LightingConfig(
+        radius: tileSize * 1.5,
+        color: Colors.transparent,
+        align: Vector2(5, 25),
+        blurBorder: 30,
       ),
     );
   }

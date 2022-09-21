@@ -2,11 +2,10 @@ import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:ng_bonfire/utils/basic_value.dart';
 import 'package:ng_bonfire/widgets/enemies/boss/boss_sprite_sheet.dart';
-import 'package:ng_bonfire/widgets/enemies/ghost/ghost_sprite_sheet.dart';
 
 const tileSize = BasicValues.TILE_SIZE;
 
-class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
+class Boss extends SimpleEnemy with ObjectCollision, Lighting {
   bool canMove = true;
   Boss({required Vector2 position})
       : super(
@@ -32,6 +31,17 @@ class Boss extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
           ),
         ],
       ),
+    );
+    setupLighting(
+      LightingConfig(
+          radius: tileSize * 1,
+          color: Colors.blue.withOpacity(0.25),
+          withPulse: true,
+          pulseSpeed: 2,
+          pulseVariation: 0.1,
+          align: Vector2(5, 35),
+          blurBorder: 15,
+          useComponentAngle: true),
     );
   }
 

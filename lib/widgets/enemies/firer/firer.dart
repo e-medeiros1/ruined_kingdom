@@ -5,8 +5,7 @@ import 'package:ng_bonfire/widgets/enemies/firer/firer_sprite_sheet.dart';
 
 const tileSize = BasicValues.TILE_SIZE;
 
-class Firer extends SimpleEnemy
-    with ObjectCollision, AutomaticRandomMovement {
+class Firer extends SimpleEnemy with ObjectCollision, Lighting {
   bool canMove = true;
   Firer({required Vector2 position})
       : super(
@@ -26,11 +25,22 @@ class Firer extends SimpleEnemy
       CollisionConfig(
         collisions: [
           CollisionArea.rectangle(
-             size: Vector2(32, 55),
+            size: Vector2(32, 55),
             align: Vector2(145, 150),
           ),
         ],
       ),
+    );
+    setupLighting(
+      LightingConfig(
+          radius: tileSize * 2.1,
+          color: Colors.orange.withOpacity(0.2),
+          withPulse: true,
+          pulseSpeed: 2,
+          pulseVariation: 0.15,
+          align: Vector2(5, 45),
+          blurBorder: 15,
+          useComponentAngle: true),
     );
   }
 
@@ -72,8 +82,7 @@ class Firer extends SimpleEnemy
             margin: tileSize,
           );
         },
-        notObserved: () {
-        },
+        notObserved: () {},
         radiusVision: tileSize * 6,
       );
     }
@@ -96,7 +105,6 @@ class Firer extends SimpleEnemy
     super.receiveDamage(attacker, damage, identify);
   }
 
-  
   void _execAttack() async {
     await Future.delayed(const Duration(milliseconds: 300));
     simpleAttackMelee(
@@ -209,7 +217,6 @@ class Firer extends SimpleEnemy
       },
     );
   }
-
 
 //Death
   @override

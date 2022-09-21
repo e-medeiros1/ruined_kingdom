@@ -5,8 +5,7 @@ import 'package:ng_bonfire/widgets/enemies/deather/deather_sprite_sheet.dart';
 
 const tileSize = BasicValues.TILE_SIZE;
 
-class Deather extends SimpleEnemy
-    with ObjectCollision, AutomaticRandomMovement {
+class Deather extends SimpleEnemy with ObjectCollision, Lighting {
   bool canMove = true;
   Deather({required Vector2 position})
       : super(
@@ -32,6 +31,17 @@ class Deather extends SimpleEnemy
           ),
         ],
       ),
+    );
+    setupLighting(
+      LightingConfig(
+          radius: tileSize * 1,
+          color: Colors.blueGrey.withOpacity(0.25),
+          withPulse: true,
+          pulseSpeed: 2,
+          pulseVariation: 0.12,
+          align: Vector2(1, 85),
+          blurBorder: 15,
+          useComponentAngle: true),
     );
   }
 
@@ -67,7 +77,6 @@ class Deather extends SimpleEnemy
                 dt,
                 closeComponent: (player) {
                   _execAttack();
-                 
                 },
               );
             },
@@ -101,14 +110,13 @@ class Deather extends SimpleEnemy
   }
 
   void _execAttack() async {
-     await Future.delayed(const Duration(milliseconds: 300));
+    await Future.delayed(const Duration(milliseconds: 300));
     simpleAttackMelee(
       withPush: false,
       damage: 30,
       size: Vector2.all(tileSize * 1.5),
       interval: 900,
-      execute: ()  {
-        
+      execute: () {
         _addBossAttackAnimation();
       },
     );

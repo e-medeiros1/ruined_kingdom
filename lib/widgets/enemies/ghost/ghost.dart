@@ -5,7 +5,7 @@ import 'package:ng_bonfire/widgets/enemies/ghost/ghost_sprite_sheet.dart';
 
 const tileSize = BasicValues.TILE_SIZE;
 
-class Ghost extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
+class Ghost extends SimpleEnemy with ObjectCollision, Lighting {
   bool canMove = true;
   Ghost({required Vector2 position})
       : super(
@@ -31,6 +31,17 @@ class Ghost extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
           ),
         ],
       ),
+    );
+    setupLighting(
+      LightingConfig(
+          radius: tileSize * 1.3,
+          color: Colors.blueGrey.withOpacity(0.25),
+          withPulse: true,
+          pulseSpeed: 2,
+          pulseVariation: 0.12,
+          align: Vector2(5, 35),
+          blurBorder: 15,
+          useComponentAngle: true),
     );
   }
 

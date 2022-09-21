@@ -6,7 +6,7 @@ import 'package:ng_bonfire/widgets/enemies/canine/canine_sprite_sheet.dart';
 
 const tileSize = BasicValues.TILE_SIZE;
 
-class Canine extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
+class Canine extends SimpleEnemy with ObjectCollision, Lighting {
   bool canMove = true;
   Canine({required Vector2 position})
       : super(
@@ -31,6 +31,17 @@ class Canine extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
           ),
         ],
       ),
+    );
+        setupLighting(
+      LightingConfig(
+          radius: tileSize * .7,
+          color: Colors.black.withOpacity(0.45),
+          withPulse: true,
+          pulseSpeed: 2,
+          pulseVariation: 0.12,
+          align: Vector2(5, 10),
+          blurBorder: 15,
+          useComponentAngle: true),
     );
   }
 
@@ -74,8 +85,6 @@ class Canine extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
           );
         },
         notObserved: () {
-          // runRandomMovement(dt,
-          //     maxDistance: 2, runOnlyVisibleInCamera: false, speed: 20);
         },
         radiusVision: tileSize * 6,
       );
@@ -99,8 +108,7 @@ class Canine extends SimpleEnemy with ObjectCollision, AutomaticRandomMovement {
     super.receiveDamage(attacker, damage, identify);
   }
 
-  void _execAttack() async {
-    await Future.delayed(const Duration(milliseconds: 500));
+  void _execAttack() {
     simpleAttackMelee(
       withPush: false,
       damage: 15,

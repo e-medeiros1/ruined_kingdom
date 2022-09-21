@@ -90,7 +90,7 @@ class _MapRenderState extends State<MapRender> {
           //Joystick
           joystick: joystick,
 
-          lightingColorGame: Colors.black.withOpacity(0.2),
+          lightingColorGame: Colors.black.withOpacity(0.25),
           background: BackgroundColorGame(Colors.grey[900]!),
           progress: Scaffold(
             body: Container(
