@@ -9,9 +9,9 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
   Super({required Vector2 position})
       : super(
           position: position,
-          speed: 180,
+          life: 300,
           size: Vector2(tileSize * 7, tileSize * 7),
-          life: 200,
+          speed: 180,
           animation: SimpleDirectionAnimation(
             idleRight: SuperSpriteSheet.superIdleRight,
             idleLeft: SuperSpriteSheet.superIdleLeft,

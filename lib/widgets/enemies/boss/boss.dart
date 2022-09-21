@@ -9,7 +9,7 @@ class Boss extends SimpleEnemy with ObjectCollision, Lighting {
   bool canMove = true;
   Boss({required Vector2 position})
       : super(
-          life: 400,
+          life: 500,
           position: position,
           initDirection: Direction.left,
           speed: 90,
@@ -82,7 +82,9 @@ class Boss extends SimpleEnemy with ObjectCollision, Lighting {
             margin: tileSize * 2,
           );
         },
-        notObserved: () {},
+        notObserved: () {
+          idle();
+        },
         radiusVision: tileSize * 8,
       );
     }
@@ -111,7 +113,7 @@ class Boss extends SimpleEnemy with ObjectCollision, Lighting {
       withPush: false,
       damage: 40,
       size: Vector2.all(tileSize * 2),
-      interval: 600,
+      interval: 700,
       execute: () {
         _addBossAttackAnimation();
       },
@@ -164,10 +166,10 @@ class Boss extends SimpleEnemy with ObjectCollision, Lighting {
 
     animation!.playOnce(
       newAnimation,
-      runToTheEnd: true,
-      onFinish: () {
+      runToTheEnd: false,
+      onFinish: (() {
         canMove = true;
-      },
+      }),
     );
   }
 
@@ -212,9 +214,9 @@ class Boss extends SimpleEnemy with ObjectCollision, Lighting {
     animation!.playOnce(
       newAnimation,
       runToTheEnd: true,
-      onFinish: () {
+      onFinish: (() {
         canMove = true;
-      },
+      }),
     );
   }
 

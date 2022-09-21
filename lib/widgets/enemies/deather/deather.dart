@@ -53,7 +53,7 @@ class Deather extends SimpleEnemy with ObjectCollision, Lighting {
       width: 55,
       borderWidth: 1.5,
       height: 5,
-      align: const Offset(90, -50),
+      align: const Offset(80, -70),
       borderRadius: BorderRadius.circular(3),
       borderColor: Colors.black87,
       colorsLife: [
@@ -80,13 +80,15 @@ class Deather extends SimpleEnemy with ObjectCollision, Lighting {
                 },
               );
             },
-            radiusVision: tileSize * 8,
+            radiusVision: tileSize * 10,
             runOnlyVisibleInScreen: true,
             margin: tileSize,
           );
         },
-        notObserved: () {},
-        radiusVision: tileSize * 8,
+        notObserved: () {
+          idle();
+        },
+        radiusVision: tileSize * 10,
       );
     }
     super.update(dt);
@@ -115,7 +117,7 @@ class Deather extends SimpleEnemy with ObjectCollision, Lighting {
       withPush: false,
       damage: 30,
       size: Vector2.all(tileSize * 1.5),
-      interval: 900,
+      interval: 800,
       execute: () {
         _addBossAttackAnimation();
       },
@@ -168,10 +170,10 @@ class Deather extends SimpleEnemy with ObjectCollision, Lighting {
 
     animation!.playOnce(
       newAnimation,
-      runToTheEnd: true,
-      onFinish: () {
+      runToTheEnd: false,
+      onFinish: (() {
         canMove = true;
-      },
+      }),
     );
   }
 
@@ -216,9 +218,9 @@ class Deather extends SimpleEnemy with ObjectCollision, Lighting {
     animation!.playOnce(
       newAnimation,
       runToTheEnd: true,
-      onFinish: () {
+      onFinish: (() {
         canMove = true;
-      },
+      }),
     );
   }
 

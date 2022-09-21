@@ -12,7 +12,7 @@ class Canine extends SimpleEnemy with ObjectCollision, Lighting {
       : super(
           life: 100,
           position: position,
-          speed: 90,
+          speed: 100,
           size: Vector2(tileSize * 2, tileSize * 2),
           animation: SimpleDirectionAnimation(
             idleRight: CanineSpriteSheet.canineIdleRight,
@@ -32,7 +32,7 @@ class Canine extends SimpleEnemy with ObjectCollision, Lighting {
         ],
       ),
     );
-        setupLighting(
+    setupLighting(
       LightingConfig(
           radius: tileSize * .7,
           color: Colors.black.withOpacity(0.45),
@@ -79,12 +79,13 @@ class Canine extends SimpleEnemy with ObjectCollision, Lighting {
                 closeComponent: (player) => _execAttack(),
               );
             },
-            radiusVision: tileSize * 8,
+            radiusVision: tileSize * 6,
             runOnlyVisibleInScreen: true,
             margin: tileSize,
           );
         },
         notObserved: () {
+          idle();
         },
         radiusVision: tileSize * 6,
       );
@@ -111,9 +112,9 @@ class Canine extends SimpleEnemy with ObjectCollision, Lighting {
   void _execAttack() {
     simpleAttackMelee(
       withPush: false,
-      damage: 15,
+      damage: 10,
       size: Vector2.all(tileSize),
-      interval: 300,
+      interval: 500,
       execute: () {
         _addBossAttackAnimation();
       },
@@ -167,10 +168,10 @@ class Canine extends SimpleEnemy with ObjectCollision, Lighting {
 
     animation!.playOnce(
       newAnimation,
-      runToTheEnd: true,
-      onFinish: () {
+      runToTheEnd: false,
+      onFinish: (() {
         canMove = true;
-      },
+      }),
     );
   }
 
@@ -215,9 +216,9 @@ class Canine extends SimpleEnemy with ObjectCollision, Lighting {
     animation!.playOnce(
       newAnimation,
       runToTheEnd: true,
-      onFinish: () {
+      onFinish: (() {
         canMove = true;
-      },
+      }),
     );
   }
 

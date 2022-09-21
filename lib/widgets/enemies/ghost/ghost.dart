@@ -12,7 +12,7 @@ class Ghost extends SimpleEnemy with ObjectCollision, Lighting {
           life: 400,
           position: position,
           initDirection: Direction.left,
-          speed: 90,
+          speed: 80,
           size: Vector2(tileSize * 7, tileSize * 7),
           animation: SimpleDirectionAnimation(
             idleRight: GhostSpriteSheet.ghostIdleRight,
@@ -27,7 +27,7 @@ class Ghost extends SimpleEnemy with ObjectCollision, Lighting {
         collisions: [
           CollisionArea.rectangle(
             size: Vector2(35, 45),
-            align: Vector2(110, 120),
+            align: Vector2(105, 120),
           ),
         ],
       ),
@@ -78,12 +78,14 @@ class Ghost extends SimpleEnemy with ObjectCollision, Lighting {
                 closeComponent: (player) => _execAttack(),
               );
             },
-            radiusVision: tileSize * 8,
+            radiusVision: tileSize * 10,
             margin: tileSize * 2,
           );
         },
-        notObserved: () {},
-        radiusVision: tileSize * 8,
+        notObserved: () {
+          idle();
+        },
+        radiusVision: tileSize * 10,
       );
     }
     super.update(dt);
@@ -110,9 +112,9 @@ class Ghost extends SimpleEnemy with ObjectCollision, Lighting {
     await Future.delayed(const Duration(milliseconds: 1000));
     simpleAttackMelee(
       withPush: false,
-      damage: 30,
+      damage: 20,
       size: Vector2.all(tileSize * 2),
-      interval: 900,
+      interval: 800,
       execute: () {
         _addBossAttackAnimation();
       },
@@ -165,10 +167,10 @@ class Ghost extends SimpleEnemy with ObjectCollision, Lighting {
 
     animation!.playOnce(
       newAnimation,
-      runToTheEnd: true,
-      onFinish: () {
+      runToTheEnd: false,
+      onFinish: (() {
         canMove = true;
-      },
+      }),
     );
   }
 
@@ -213,9 +215,9 @@ class Ghost extends SimpleEnemy with ObjectCollision, Lighting {
     animation!.playOnce(
       newAnimation,
       runToTheEnd: true,
-      onFinish: () {
+      onFinish: (() {
         canMove = true;
-      },
+      }),
     );
   }
 

@@ -12,7 +12,7 @@ class Firer extends SimpleEnemy with ObjectCollision, Lighting {
           life: 600,
           position: position,
           speed: 70,
-          size: Vector2(tileSize * 10, tileSize * 10),
+          size: Vector2(tileSize * 9, tileSize * 9),
           animation: SimpleDirectionAnimation(
             idleRight: FirerSpriteSheet.firerIdleRight,
             idleLeft: FirerSpriteSheet.firerIdleLeft,
@@ -25,8 +25,8 @@ class Firer extends SimpleEnemy with ObjectCollision, Lighting {
       CollisionConfig(
         collisions: [
           CollisionArea.rectangle(
-            size: Vector2(32, 55),
-            align: Vector2(145, 150),
+            size: Vector2(27, 50),
+            align: Vector2(130, 140),
           ),
         ],
       ),
@@ -77,13 +77,15 @@ class Firer extends SimpleEnemy with ObjectCollision, Lighting {
                 closeComponent: (player) => _execAttack(),
               );
             },
-            radiusVision: tileSize * 6,
+            radiusVision: tileSize * 8,
             runOnlyVisibleInScreen: true,
             margin: tileSize,
           );
         },
-        notObserved: () {},
-        radiusVision: tileSize * 6,
+        notObserved: () {
+          idle();
+        },
+        radiusVision: tileSize * 8,
       );
     }
     super.update(dt);
@@ -110,8 +112,8 @@ class Firer extends SimpleEnemy with ObjectCollision, Lighting {
     simpleAttackMelee(
       withPush: false,
       damage: 30,
-      size: Vector2.all(tileSize),
-      interval: 500,
+      size: Vector2.all(tileSize * 1.3),
+      interval: 400,
       execute: () {
         _addBossAttackAnimation();
       },
@@ -164,10 +166,10 @@ class Firer extends SimpleEnemy with ObjectCollision, Lighting {
 
     animation!.playOnce(
       newAnimation,
-      runToTheEnd: true,
-      onFinish: () {
+      runToTheEnd: false,
+      onFinish: (() {
         canMove = true;
-      },
+      }),
     );
   }
 
@@ -212,9 +214,9 @@ class Firer extends SimpleEnemy with ObjectCollision, Lighting {
     animation!.playOnce(
       newAnimation,
       runToTheEnd: true,
-      onFinish: () {
+      onFinish: (() {
         canMove = true;
-      },
+      }),
     );
   }
 
