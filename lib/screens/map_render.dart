@@ -3,6 +3,7 @@ import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ng_bonfire/utils/basic_value.dart';
+import 'package:ng_bonfire/widgets/decoration/bonfire/bonfire.dart';
 import 'package:ng_bonfire/widgets/decoration/potion/potion.dart';
 import 'package:ng_bonfire/widgets/enemies/boss/boss.dart';
 import 'package:ng_bonfire/widgets/enemies/canine/canine.dart';
@@ -80,6 +81,7 @@ class _MapRenderState extends State<MapRender> {
               'deather': (properties) => Deather(position: properties.position),
               'boss': (properties) => Boss(position: properties.position),
               'potion': (properties) => Potion(position: properties.position),
+              'bonfire': (properties) => Bonfire(position: properties.position),
             },
           ),
           player: Super(position: Vector2(tileSize * 20, tileSize * 31)),
@@ -91,8 +93,7 @@ class _MapRenderState extends State<MapRender> {
           ),
           //Joystick
           joystick: joystick,
-
-          lightingColorGame: Colors.black.withOpacity(0.25),
+          lightingColorGame: Colors.black.withOpacity(0.3),
           background: BackgroundColorGame(Colors.grey[900]!),
           progress: Scaffold(
             body: Container(
@@ -103,7 +104,6 @@ class _MapRenderState extends State<MapRender> {
                   style: TextStyle(
                     color: Colors.white,
                     fontStyle: FontStyle.italic,
-                    fontFamily: 'PressStart2P-Regular',
                     fontSize: 20.0,
                     fontWeight: FontWeight.w400,
                   ),

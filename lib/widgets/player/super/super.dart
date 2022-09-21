@@ -32,9 +32,10 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
     );
     setupLighting(
       LightingConfig(
-        radius: tileSize * 1.5,
-        color: Colors.transparent,
+        radius: tileSize,
+        color: Colors.lightBlue.shade200.withOpacity(0.1),
         align: Vector2(5, 25),
+        withPulse: true,
         blurBorder: 30,
       ),
     );
@@ -61,7 +62,9 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
       _addAttackAnimation(() {
         lockMove = false;
       });
-      _meleeAttack();
+      _meleeAttack(() {
+        lockMove = true;
+      });
     }
 
     if (event.id == LogicalKeyboardKey.space.keyId &&
@@ -69,7 +72,9 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
       _addAttackAnimation(() {
         lockMove = false;
       });
-      _meleeAttack();
+      _meleeAttack(() {
+        lockMove = true;
+      });
     }
 
     if (event.id == LogicalKeyboardKey.keyX.keyId &&
@@ -77,14 +82,18 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
       _addEspecialAttackAnimation(() {
         lockMove = false;
       });
-      _especialAttack();
+      _especialAttack(() {
+        lockMove = true;
+      });
     }
 
     if (event.id == 1 && event.event == ActionEvent.DOWN) {
       _addEspecialAttackAnimation(() {
         lockMove = false;
       });
-      _especialAttack();
+      _especialAttack(() {
+        lockMove = true;
+      });
     }
     super.joystickAction(event);
   }
@@ -103,7 +112,7 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
   }
 
 //Normal Attack
-  _meleeAttack() async {
+  _meleeAttack(VoidCallback onFinish) async {
     lockMove = true;
     idle();
     await Future.delayed(const Duration(milliseconds: 300));
@@ -115,13 +124,13 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
   }
 
 //Especial Attack
-  _especialAttack() async {
+  _especialAttack(VoidCallback onFinish) async {
     lockMove = true;
     idle();
     await Future.delayed(const Duration(milliseconds: 500));
     simpleAttackMelee(
         damage: 50,
-        size: Vector2.all(tileSize + 10),
+        size: Vector2.all(tileSize + 20),
         withPush: true,
         sizePush: tileSize / 3);
   }

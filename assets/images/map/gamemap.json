@@ -566,9 +566,31 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":17,
+         "name":"bonfire",
+         "objects":[
+                {
+                 "class":"",
+                 "height":16,
+                 "id":23,
+                 "name":"bonfire",
+                 "rotation":0,
+                 "visible":true,
+                 "width":16,
+                 "x":415.5,
+                 "y":496
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":16,
- "nextobjectid":23,
+ "nextlayerid":18,
+ "nextobjectid":24,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.1",
