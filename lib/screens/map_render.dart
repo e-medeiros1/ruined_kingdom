@@ -3,6 +3,7 @@ import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ng_bonfire/utils/basic_value.dart';
+import 'package:ng_bonfire/widgets/decoration/potion/potion.dart';
 import 'package:ng_bonfire/widgets/enemies/boss/boss.dart';
 import 'package:ng_bonfire/widgets/enemies/canine/canine.dart';
 import 'package:ng_bonfire/widgets/enemies/deather/deather.dart';
@@ -78,6 +79,7 @@ class _MapRenderState extends State<MapRender> {
               'ghost': (properties) => Ghost(position: properties.position),
               'deather': (properties) => Deather(position: properties.position),
               'boss': (properties) => Boss(position: properties.position),
+              'potion': (properties) => Potion(position: properties.position),
             },
           ),
           player: Super(position: Vector2(tileSize * 20, tileSize * 31)),
