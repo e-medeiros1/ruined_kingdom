@@ -6,7 +6,7 @@ class BonfireSpriteSheet {
         'decoration/bonfire.png',
         SpriteAnimationData.sequenced(
           amount: 11,
-          stepTime: 0.3,
+          stepTime: 0.15,
           textureSize: Vector2(231, 231),
         ),
       );

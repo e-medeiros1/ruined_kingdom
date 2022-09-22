@@ -115,7 +115,7 @@ class Deather extends SimpleEnemy with ObjectCollision, Lighting {
     await Future.delayed(const Duration(milliseconds: 300));
     simpleAttackMelee(
       withPush: false,
-      damage: 30,
+      damage: 40,
       size: Vector2.all(tileSize * 1.5),
       interval: 800,
       execute: () {

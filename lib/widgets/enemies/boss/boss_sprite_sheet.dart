@@ -10,8 +10,7 @@ class BossSpriteSheet {
           textureSize: Vector2(158, 158),
         ),
       );
-  static Future<SpriteAnimation> get bossIdleRight =>
-      SpriteAnimation.load(
+  static Future<SpriteAnimation> get bossIdleRight => SpriteAnimation.load(
         'enemies/boss/Idle_right.png',
         SpriteAnimationData.sequenced(
           amount: 10,
@@ -24,18 +23,18 @@ class BossSpriteSheet {
   static Future<SpriteAnimation> get bossRunLeft => SpriteAnimation.load(
         'enemies/boss/Run_left.png',
         SpriteAnimationData.sequenced(
-            amount: 8,
-            stepTime: 0.2,
-            textureSize: Vector2(176, 176),
-            ),
+          amount: 8,
+          stepTime: 0.2,
+          textureSize: Vector2(176, 176),
+        ),
       );
   static Future<SpriteAnimation> get bossRunRight => SpriteAnimation.load(
         'enemies/boss/Run_right.png',
         SpriteAnimationData.sequenced(
-            amount: 8,
-            stepTime: 0.2,
-            textureSize: Vector2(176, 176),
-            ),
+          amount: 8,
+          stepTime: 0.2,
+          textureSize: Vector2(176, 176),
+        ),
       );
 
 //Death
@@ -53,7 +52,7 @@ class BossSpriteSheet {
         SpriteAnimationData.sequenced(
           amount: 16,
           stepTime: 0.2,
-          textureSize: Vector2(124, 124),
+          textureSize: Vector2(109, 109),
         ),
       );
 

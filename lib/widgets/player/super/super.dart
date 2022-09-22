@@ -4,6 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:ng_bonfire/screens/map_render.dart';
 import 'package:ng_bonfire/widgets/player/super/super_sprite_sheet.dart';
 
+double especialDamage = 50;
+double normalDamage = 25;
+
 class Super extends SimplePlayer with ObjectCollision, Lighting {
   bool lockMove = false;
   Super({required Vector2 position})
@@ -11,7 +14,7 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
           position: position,
           life: 300,
           size: Vector2(tileSize * 7, tileSize * 7),
-          speed: 180,
+          speed: 150,
           animation: SimpleDirectionAnimation(
             idleRight: SuperSpriteSheet.superIdleRight,
             idleLeft: SuperSpriteSheet.superIdleLeft,
@@ -116,8 +119,9 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
     lockMove = true;
     idle();
     await Future.delayed(const Duration(milliseconds: 300));
+
     simpleAttackMelee(
-      damage: 25,
+      damage: normalDamage,
       size: Vector2.all(tileSize),
       withPush: false,
     );
@@ -128,8 +132,9 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
     lockMove = true;
     idle();
     await Future.delayed(const Duration(milliseconds: 500));
+
     simpleAttackMelee(
-        damage: 50,
+        damage: especialDamage,
         size: Vector2.all(tileSize + 20),
         withPush: true,
         sizePush: tileSize / 3);
