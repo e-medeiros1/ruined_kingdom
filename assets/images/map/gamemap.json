@@ -527,39 +527,6 @@
                  "width":16,
                  "x":1104,
                  "y":401
-                }, 
-                {
-                 "class":"",
-                 "height":16,
-                 "id":20,
-                 "name":"potion",
-                 "rotation":0,
-                 "visible":true,
-                 "width":16,
-                 "x":830.5,
-                 "y":178.5
-                }, 
-                {
-                 "class":"",
-                 "height":16,
-                 "id":21,
-                 "name":"potion",
-                 "rotation":0,
-                 "visible":true,
-                 "width":16,
-                 "x":355,
-                 "y":167
-                }, 
-                {
-                 "class":"",
-                 "height":16,
-                 "id":22,
-                 "name":"potion",
-                 "rotation":0,
-                 "visible":true,
-                 "width":16,
-                 "x":1184.5,
-                 "y":179
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -580,8 +547,52 @@
                  "rotation":0,
                  "visible":true,
                  "width":16,
-                 "x":415.5,
-                 "y":496
+                 "x":351.5,
+                 "y":519.5
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":18,
+         "name":"sword",
+         "objects":[
+                {
+                 "class":"",
+                 "height":16,
+                 "id":24,
+                 "name":"sword",
+                 "rotation":0,
+                 "visible":true,
+                 "width":16,
+                 "x":879.333333333333,
+                 "y":204.083333333333
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":19,
+         "name":"boots",
+         "objects":[
+                {
+                 "class":"",
+                 "height":16,
+                 "id":25,
+                 "name":"boots",
+                 "rotation":0,
+                 "visible":true,
+                 "width":16,
+                 "x":358.333333333333,
+                 "y":160.666666666667
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -589,8 +600,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":18,
- "nextobjectid":24,
+ "nextlayerid":20,
+ "nextobjectid":26,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.1",
