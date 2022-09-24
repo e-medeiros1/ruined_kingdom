@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ng_bonfire/screens/map_render.dart';
+import 'package:ng_bonfire/screens/home_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,10 +17,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(fontFamily: 'PressStart2P',),
+    return   MaterialApp(
+      theme: ThemeData(fontFamily: 'PressStart2P-Regular'),
       debugShowCheckedModeBanner: false,
-      home: const MapRender(),
+      home: const  HomePage(),
     );
   }
 }

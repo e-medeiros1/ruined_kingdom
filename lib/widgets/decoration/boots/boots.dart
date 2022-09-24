@@ -2,6 +2,8 @@ import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:ng_bonfire/widgets/decoration/boots/boots_sprite_sheet.dart';
 import 'package:ng_bonfire/widgets/enemies/ghost/ghost.dart';
+import 'dart:io' show Platform;
+
 
 class Boots extends GameDecoration with Sensor, Lighting {
   Boots({required Vector2 position})
@@ -31,7 +33,11 @@ class Boots extends GameDecoration with Sensor, Lighting {
   @override
   void onContact(GameComponent component) {
     if (component is Player) {
-      gameRef.player?.speed = 200;
+      if(Platform.isAndroid){
+        gameRef.player?.speed = 160;
+      } else {
+        gameRef.player?.speed = 200;
+      }
     } else if (component is Enemy) {
       null;
     }

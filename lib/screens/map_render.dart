@@ -24,7 +24,17 @@ class MapRender extends StatefulWidget {
   State<MapRender> createState() => _MapRenderState();
 }
 
-class _MapRenderState extends State<MapRender> {
+class _MapRenderState extends State<MapRender> implements GameListener {
+  bool showGameOver = false;
+
+  late GameController _controller;
+
+  @override
+  void initState() {
+    _controller = GameController()..addListener(this);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -62,7 +72,7 @@ class _MapRenderState extends State<MapRender> {
           keyboardDirectionalType: KeyboardDirectionalType.wasdAndArrows,
           acceptedKeys: [
             LogicalKeyboardKey.space,
-            LogicalKeyboardKey.keyX,
+            LogicalKeyboardKey.keyZ,
           ],
         ),
       );
@@ -97,19 +107,19 @@ class _MapRenderState extends State<MapRender> {
           ),
           //Joystick
           joystick: joystick,
-          lightingColorGame: Colors.black.withOpacity(0.3),
+          lightingColorGame: Platform.isWindows ? Colors.black.withOpacity(0.3) : Colors.black.withOpacity(0.15),
           background: BackgroundColorGame(Colors.grey[900]!),
           progress: Scaffold(
             body: Container(
               color: Colors.black,
               child: const Center(
                 child: Text(
-                  "Carregando...",
+                  "Loading...",
                   style: TextStyle(
                     color: Colors.white,
                     fontStyle: FontStyle.italic,
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.w400,
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.w300,
                   ),
                 ),
               ),
@@ -119,4 +129,11 @@ class _MapRenderState extends State<MapRender> {
       ),
     );
   }
+
+  @override
+  void changeCountLiveEnemies(int count) {}
+
+  @override
+  void updateGame() {}
 }
+
