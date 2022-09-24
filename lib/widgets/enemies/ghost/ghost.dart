@@ -67,19 +67,20 @@ class Ghost extends SimpleEnemy with ObjectCollision, Lighting {
   @override
   void update(double dt) {
     if (canMove) {
-      seePlayer(
+     seePlayer(
         observed: (player) {
           seeAndMoveToPlayer(
             closePlayer: (player) {
               followComponent(
-                margin: tileSize,
                 player,
                 dt,
-                closeComponent: (player) => _execAttack(),
+                closeComponent: (player) {
+                  _execAttack();
+                },
               );
             },
             radiusVision: tileSize * 10,
-            margin: tileSize * 2,
+            runOnlyVisibleInScreen: true,
           );
         },
         notObserved: () {

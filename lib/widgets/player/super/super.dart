@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ng_bonfire/screens/map_render.dart';
 import 'package:ng_bonfire/widgets/player/super/super_sprite_sheet.dart';
+import 'dart:io' show Platform;
+
 
 double especialDamage = 50;
 double normalDamage = 25;
@@ -14,7 +16,7 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
           position: position,
           life: 300,
           size: Vector2(tileSize * 7, tileSize * 7),
-          speed: 150,
+          speed: Platform.isAndroid ? 130 : 150,
           animation: SimpleDirectionAnimation(
             idleRight: SuperSpriteSheet.superIdleRight,
             idleLeft: SuperSpriteSheet.superIdleLeft,
@@ -62,40 +64,44 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
   void joystickAction(JoystickActionEvent event) async {
     if (isDead || lockMove) return;
     if (event.id == 0 && event.event == ActionEvent.DOWN) {
+      lockMove = true;
       _addAttackAnimation(() {
         lockMove = false;
       });
       _meleeAttack(() {
-        lockMove = true;
+        lockMove = false;
       });
     }
 
     if (event.id == LogicalKeyboardKey.space.keyId &&
         event.event == ActionEvent.DOWN) {
+          lockMove = true;
       _addAttackAnimation(() {
         lockMove = false;
       });
       _meleeAttack(() {
-        lockMove = true;
+        lockMove = false;
       });
     }
 
-    if (event.id == LogicalKeyboardKey.keyX.keyId &&
+    if (event.id == LogicalKeyboardKey.keyZ.keyId &&
         event.event == ActionEvent.DOWN) {
+          lockMove = true;
       _addEspecialAttackAnimation(() {
         lockMove = false;
       });
       _especialAttack(() {
-        lockMove = true;
+        lockMove = false;
       });
     }
 
     if (event.id == 1 && event.event == ActionEvent.DOWN) {
+      lockMove = true;
       _addEspecialAttackAnimation(() {
         lockMove = false;
       });
       _especialAttack(() {
-        lockMove = true;
+        lockMove = false;
       });
     }
     super.joystickAction(event);
@@ -142,6 +148,8 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
 
 //Range atack
   void _addEspecialAttackAnimation(VoidCallback onFinish) {
+    lockMove = true;
+    idle();
     Future<SpriteAnimation> newAnimation;
     switch (lastDirectionHorizontal) {
       case Direction.left:

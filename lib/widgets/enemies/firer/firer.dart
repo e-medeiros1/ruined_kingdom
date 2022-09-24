@@ -9,10 +9,10 @@ class Firer extends SimpleEnemy with ObjectCollision, Lighting {
   bool canMove = true;
   Firer({required Vector2 position})
       : super(
-          life: 600,
+          life: 500,
           position: position,
           speed: 70,
-          size: Vector2(tileSize * 9, tileSize * 9),
+          size: Vector2(tileSize * 7.5, tileSize * 7.5),
           animation: SimpleDirectionAnimation(
             idleRight: FirerSpriteSheet.firerIdleRight,
             idleLeft: FirerSpriteSheet.firerIdleLeft,
@@ -25,20 +25,20 @@ class Firer extends SimpleEnemy with ObjectCollision, Lighting {
       CollisionConfig(
         collisions: [
           CollisionArea.rectangle(
-            size: Vector2(27, 50),
-            align: Vector2(130, 140),
+            size: Vector2(25, 45),
+            align: Vector2(105, 110),
           ),
         ],
       ),
     );
     setupLighting(
       LightingConfig(
-          radius: tileSize * 2.1,
-          color: Colors.orange.withOpacity(0.2),
+          radius: tileSize * 1.5,
+          color: Colors.orange.withOpacity(0.25),
           withPulse: true,
           pulseSpeed: 2,
           pulseVariation: 0.15,
-          align: Vector2(5, 45),
+          align: Vector2(5, 30),
           blurBorder: 15,
           useComponentAngle: true),
     );
@@ -52,7 +52,7 @@ class Firer extends SimpleEnemy with ObjectCollision, Lighting {
       width: 60,
       borderWidth: 1.5,
       height: 5,
-      align: const Offset(120, -80),
+      align: const Offset(90, -60),
       borderRadius: BorderRadius.circular(3),
       borderColor: Colors.black87,
       colorsLife: [
@@ -113,7 +113,7 @@ class Firer extends SimpleEnemy with ObjectCollision, Lighting {
       withPush: false,
       damage: 30,
       size: Vector2.all(tileSize * 1.3),
-      interval: 400,
+      interval: 500,
       execute: () {
         _addBossAttackAnimation();
       },

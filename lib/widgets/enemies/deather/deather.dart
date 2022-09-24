@@ -72,7 +72,6 @@ class Deather extends SimpleEnemy with ObjectCollision, Lighting {
           seeAndMoveToPlayer(
             closePlayer: (player) {
               followComponent(
-                margin: tileSize,
                 player,
                 dt,
                 closeComponent: (player) {
@@ -82,7 +81,6 @@ class Deather extends SimpleEnemy with ObjectCollision, Lighting {
             },
             radiusVision: tileSize * 10,
             runOnlyVisibleInScreen: true,
-            margin: tileSize,
           );
         },
         notObserved: () {

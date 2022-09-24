@@ -9,11 +9,11 @@ class Boss extends SimpleEnemy with ObjectCollision, Lighting {
   bool canMove = true;
   Boss({required Vector2 position})
       : super(
-          life: 500,
+          life: 600,
           position: position,
           initDirection: Direction.left,
-          speed: 90,
-          size: Vector2(tileSize * 7, tileSize * 7),
+          speed: 85,
+          size: Vector2(tileSize * 9, tileSize * 9),
           animation: SimpleDirectionAnimation(
             idleRight: BossSpriteSheet.bossIdleRight,
             idleLeft: BossSpriteSheet.bossIdleLeft,
@@ -26,15 +26,15 @@ class Boss extends SimpleEnemy with ObjectCollision, Lighting {
       CollisionConfig(
         collisions: [
           CollisionArea.rectangle(
-            size: Vector2(35, 45),
-            align: Vector2(100, 105),
+            size: Vector2(35, 65),
+            align: Vector2(125, 130),
           ),
         ],
       ),
     );
     setupLighting(
       LightingConfig(
-          radius: tileSize * 1,
+          radius: tileSize * 2,
           color: Colors.blue.withOpacity(0.25),
           withPulse: true,
           pulseSpeed: 2,
@@ -50,10 +50,10 @@ class Boss extends SimpleEnemy with ObjectCollision, Lighting {
   void render(Canvas canvas) {
     drawDefaultLifeBar(
       canvas,
-      width: 55,
+      width: 65,
       borderWidth: 1.5,
       height: 5,
-      align: const Offset(90, -40),
+      align: const Offset(100, -35),
       borderRadius: BorderRadius.circular(3),
       borderColor: Colors.black87,
       colorsLife: [
@@ -72,14 +72,12 @@ class Boss extends SimpleEnemy with ObjectCollision, Lighting {
           seeAndMoveToPlayer(
             closePlayer: (player) {
               followComponent(
-                margin: tileSize,
                 player,
                 dt,
                 closeComponent: (player) => _execAttack(),
               );
             },
             radiusVision: tileSize * 8,
-            margin: tileSize * 2,
           );
         },
         notObserved: () {
@@ -111,9 +109,9 @@ class Boss extends SimpleEnemy with ObjectCollision, Lighting {
   void _execAttack() {
     simpleAttackMelee(
       withPush: false,
-      damage: 40,
+      damage: 50,
       size: Vector2.all(tileSize * 2),
-      interval: 700,
+      interval: 600,
       execute: () {
         _addBossAttackAnimation();
       },
