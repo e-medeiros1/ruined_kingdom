@@ -5,7 +5,7 @@ import 'package:ng_bonfire/widgets/enemies/firer/firer_sprite_sheet.dart';
 
 const tileSize = BasicValues.TILE_SIZE;
 
-class Firer extends SimpleEnemy with ObjectCollision, Lighting {
+class Firer extends SimpleEnemy with ObjectCollision, Lighting, AutomaticRandomMovement {
   bool canMove = true;
   Firer({required Vector2 position})
       : super(
@@ -83,7 +83,7 @@ class Firer extends SimpleEnemy with ObjectCollision, Lighting {
           );
         },
         notObserved: () {
-          idle();
+          runRandomMovement(dt, speed: 20, maxDistance: 50);
         },
         radiusVision: tileSize * 8,
       );
@@ -107,8 +107,8 @@ class Firer extends SimpleEnemy with ObjectCollision, Lighting {
     super.receiveDamage(attacker, damage, identify);
   }
 
-  void _execAttack() async {
-    await Future.delayed(const Duration(milliseconds: 300));
+  void _execAttack()  {
+  
     simpleAttackMelee(
       withPush: false,
       damage: 30,

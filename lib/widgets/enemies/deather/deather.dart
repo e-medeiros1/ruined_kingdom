@@ -5,7 +5,7 @@ import 'package:ng_bonfire/widgets/enemies/deather/deather_sprite_sheet.dart';
 
 const tileSize = BasicValues.TILE_SIZE;
 
-class Deather extends SimpleEnemy with ObjectCollision, Lighting {
+class Deather extends SimpleEnemy with ObjectCollision, Lighting, AutomaticRandomMovement {
   bool canMove = true;
   Deather({required Vector2 position})
       : super(
@@ -26,8 +26,8 @@ class Deather extends SimpleEnemy with ObjectCollision, Lighting {
       CollisionConfig(
         collisions: [
           CollisionArea.rectangle(
-            size: Vector2(30, 45),
-            align: Vector2(95, 140),
+            size: Vector2(40, 45),
+            align: Vector2(95, 130),
           ),
         ],
       ),
@@ -64,7 +64,7 @@ class Deather extends SimpleEnemy with ObjectCollision, Lighting {
   }
 
 //Ataca ao ver
-  @override
+   @override
   void update(double dt) {
     if (canMove) {
       seePlayer(
@@ -72,21 +72,21 @@ class Deather extends SimpleEnemy with ObjectCollision, Lighting {
           seeAndMoveToPlayer(
             closePlayer: (player) {
               followComponent(
+                margin: tileSize,
                 player,
                 dt,
-                closeComponent: (player) {
-                  _execAttack();
-                },
+                closeComponent: (player) => _execAttack(),
               );
             },
-            radiusVision: tileSize * 10,
+            radiusVision: tileSize * 8,
             runOnlyVisibleInScreen: true,
+            margin: tileSize,
           );
         },
         notObserved: () {
-          idle();
+           runRandomMovement(dt, speed: 15, maxDistance: 50);
         },
-        radiusVision: tileSize * 10,
+        radiusVision: tileSize * 8,
       );
     }
     super.update(dt);
@@ -98,8 +98,7 @@ class Deather extends SimpleEnemy with ObjectCollision, Lighting {
       _addDamageAnimation();
       showDamage(
         -damage,
-        initVelocityTop: -3,
-        maxDownSize: 20,
+        initVelocityTop: -2,
         config: TextStyle(
           color: Colors.blue.shade200,
           fontSize: tileSize / 2,
@@ -109,8 +108,8 @@ class Deather extends SimpleEnemy with ObjectCollision, Lighting {
     super.receiveDamage(attacker, damage, identify);
   }
 
-  void _execAttack() async {
-    await Future.delayed(const Duration(milliseconds: 300));
+  void _execAttack()  {
+  
     simpleAttackMelee(
       withPush: false,
       damage: 40,

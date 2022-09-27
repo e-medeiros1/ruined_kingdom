@@ -5,7 +5,7 @@ import 'package:ng_bonfire/widgets/enemies/ghost/ghost_sprite_sheet.dart';
 
 const tileSize = BasicValues.TILE_SIZE;
 
-class Ghost extends SimpleEnemy with ObjectCollision, Lighting {
+class Ghost extends SimpleEnemy with ObjectCollision, Lighting, AutomaticRandomMovement {
   bool canMove = true;
   Ghost({required Vector2 position})
       : super(
@@ -67,26 +67,26 @@ class Ghost extends SimpleEnemy with ObjectCollision, Lighting {
   @override
   void update(double dt) {
     if (canMove) {
-     seePlayer(
+      seePlayer(
         observed: (player) {
           seeAndMoveToPlayer(
             closePlayer: (player) {
               followComponent(
+                margin: tileSize,
                 player,
                 dt,
-                closeComponent: (player) {
-                  _execAttack();
-                },
+                closeComponent: (player) => _execAttack(),
               );
             },
-            radiusVision: tileSize * 10,
+            radiusVision: tileSize * 8,
             runOnlyVisibleInScreen: true,
+            margin: tileSize,
           );
         },
         notObserved: () {
-          idle();
+           runRandomMovement(dt, speed: 25, maxDistance: 50);
         },
-        radiusVision: tileSize * 10,
+        radiusVision: tileSize * 8,
       );
     }
     super.update(dt);
@@ -98,8 +98,7 @@ class Ghost extends SimpleEnemy with ObjectCollision, Lighting {
       _addDamageAnimation();
       showDamage(
         -damage,
-        initVelocityTop: -3,
-        maxDownSize: 20,
+        initVelocityTop: -2,
         config: TextStyle(
           color: Colors.blue.shade200,
           fontSize: tileSize / 2,
@@ -109,11 +108,11 @@ class Ghost extends SimpleEnemy with ObjectCollision, Lighting {
     super.receiveDamage(attacker, damage, identify);
   }
 
-  void _execAttack() async {
-    await Future.delayed(const Duration(milliseconds: 1000));
+  void _execAttack()  {
+  
     simpleAttackMelee(
       withPush: false,
-      damage: 20,
+      damage: 40,
       size: Vector2.all(tileSize * 2),
       interval: 800,
       execute: () {

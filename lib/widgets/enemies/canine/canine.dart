@@ -6,7 +6,8 @@ import 'package:ng_bonfire/widgets/enemies/canine/canine_sprite_sheet.dart';
 
 const tileSize = BasicValues.TILE_SIZE;
 
-class Canine extends SimpleEnemy with ObjectCollision, Lighting {
+class Canine extends SimpleEnemy
+    with ObjectCollision, Lighting, AutomaticRandomMovement {
   bool canMove = true;
   Canine({required Vector2 position})
       : super(
@@ -53,7 +54,7 @@ class Canine extends SimpleEnemy with ObjectCollision, Lighting {
       width: 35,
       borderWidth: 1.5,
       height: 4,
-      align: const Offset(25, -10),
+      align: const Offset(23, -8),
       borderRadius: BorderRadius.circular(3),
       borderColor: Colors.black87,
       colorsLife: [
@@ -70,7 +71,6 @@ class Canine extends SimpleEnemy with ObjectCollision, Lighting {
       seePlayer(
         observed: (player) {
           seeAndMoveToPlayer(
-            // Quando tiver próximo do player, faz:
             closePlayer: (player) {
               followComponent(
                 margin: tileSize,
@@ -85,7 +85,7 @@ class Canine extends SimpleEnemy with ObjectCollision, Lighting {
           );
         },
         notObserved: () {
-          idle();
+          runRandomMovement(dt, speed: 15, maxDistance: 30);
         },
         radiusVision: tileSize * 6,
       );
@@ -112,7 +112,7 @@ class Canine extends SimpleEnemy with ObjectCollision, Lighting {
   void _execAttack() {
     simpleAttackMelee(
       withPush: false,
-      damage: 10,
+      damage: 20,
       size: Vector2.all(tileSize),
       interval: 500,
       execute: () {

@@ -1,7 +1,8 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'dart:async' as async;
 
 import 'package:bonfire/bonfire.dart';
-import 'package:flame_splash_screen/flame_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:ng_bonfire/screens/map_render.dart';
 import 'package:ng_bonfire/widgets/enemies/boss/boss_sprite_sheet.dart';
@@ -18,7 +19,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool showSplash = true;
   int currentPosition = 0;
   late async.Timer _timer;
   List<Future<SpriteAnimation>> sprites = [
@@ -27,7 +27,6 @@ class _HomePageState extends State<HomePage> {
     FirerSpriteSheet.firerRunRight
   ];
 
-  //Github
   final Uri myGithub =
       Uri(scheme: 'https', host: 'www.github.com', path: '/e-medeiros1/');
   final Uri bonfireGithub = Uri(
@@ -52,13 +51,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 300),
-      child: showSplash ? buildSplash() : buildMenu(),
-    );
-  }
-
-  Widget buildMenu() {
     return Scaffold(
       backgroundColor: Colors.black,
       body: Center(
@@ -187,18 +179,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget buildSplash() {
-    return FlameSplashScreen(
-      theme: FlameSplashTheme.dark,
-      onFinish: (BuildContext context) {
-        setState(() {
-          showSplash = false;
-        });
-        startTimer();
-      },
     );
   }
 

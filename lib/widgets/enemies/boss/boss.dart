@@ -5,7 +5,7 @@ import 'package:ng_bonfire/widgets/enemies/boss/boss_sprite_sheet.dart';
 
 const tileSize = BasicValues.TILE_SIZE;
 
-class Boss extends SimpleEnemy with ObjectCollision, Lighting {
+class Boss extends SimpleEnemy with ObjectCollision, Lighting, AutomaticRandomMovement {
   bool canMove = true;
   Boss({required Vector2 position})
       : super(
@@ -72,16 +72,19 @@ class Boss extends SimpleEnemy with ObjectCollision, Lighting {
           seeAndMoveToPlayer(
             closePlayer: (player) {
               followComponent(
+                margin: tileSize,
                 player,
                 dt,
                 closeComponent: (player) => _execAttack(),
               );
             },
             radiusVision: tileSize * 8,
+            runOnlyVisibleInScreen: true,
+            margin: tileSize,
           );
         },
         notObserved: () {
-          idle();
+           runRandomMovement(dt, speed: 20, maxDistance: 40);
         },
         radiusVision: tileSize * 8,
       );
@@ -95,10 +98,9 @@ class Boss extends SimpleEnemy with ObjectCollision, Lighting {
       _addDamageAnimation();
       showDamage(
         -damage,
-        initVelocityTop: -3,
-        maxDownSize: 20,
+        initVelocityTop: -2,
         config: TextStyle(
-          color: Colors.blue.shade100,
+          color: Colors.orange.shade200,
           fontSize: tileSize / 2,
         ),
       );
@@ -106,12 +108,13 @@ class Boss extends SimpleEnemy with ObjectCollision, Lighting {
     super.receiveDamage(attacker, damage, identify);
   }
 
-  void _execAttack() {
+  void _execAttack()  {
+  
     simpleAttackMelee(
       withPush: false,
-      damage: 50,
-      size: Vector2.all(tileSize * 2),
-      interval: 600,
+      damage: 30,
+      size: Vector2.all(tileSize * 1.3),
+      interval: 500,
       execute: () {
         _addBossAttackAnimation();
       },
