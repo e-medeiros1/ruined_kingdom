@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:ng_bonfire/utils/basic_value.dart';
 import 'package:ng_bonfire/widgets/decoration/bonfire/bonfire.dart';
 import 'package:ng_bonfire/widgets/decoration/boots/boots.dart';
+import 'package:ng_bonfire/widgets/decoration/heal/heal.dart';
 import 'package:ng_bonfire/widgets/decoration/potion/potion.dart';
 import 'package:ng_bonfire/widgets/decoration/sword/sword.dart';
 import 'package:ng_bonfire/widgets/enemies/boss/boss.dart';
@@ -12,10 +13,10 @@ import 'package:ng_bonfire/widgets/enemies/canine/canine.dart';
 import 'package:ng_bonfire/widgets/enemies/deather/deather.dart';
 import 'package:ng_bonfire/widgets/enemies/firer/firer.dart';
 import 'package:ng_bonfire/widgets/enemies/ghost/ghost.dart';
+import 'package:ng_bonfire/widgets/interface/game_controller.dart';
+import 'package:ng_bonfire/widgets/interface/super_interface.dart';
 import 'package:ng_bonfire/widgets/player/super/super.dart';
 import 'dart:io' show Platform;
-
-const double tileSize = BasicValues.TILE_SIZE;
 
 class MapRender extends StatefulWidget {
   const MapRender({super.key});
@@ -25,13 +26,12 @@ class MapRender extends StatefulWidget {
 }
 
 class _MapRenderState extends State<MapRender> implements GameListener {
-  bool showGameOver = false;
-
-  late GameController _controller;
+  double tileSize = BasicValues.TILE_SIZE;
+  late GameController controller;
 
   @override
   void initState() {
-    _controller = GameController()..addListener(this);
+    controller = GameController()..addListener(this);
     super.initState();
   }
 
@@ -77,6 +77,7 @@ class _MapRenderState extends State<MapRender> implements GameListener {
         ),
       );
     }
+
     return Center(
       child: SizedBox(
         width: sizeScreen,
@@ -96,6 +97,7 @@ class _MapRenderState extends State<MapRender> implements GameListener {
               'bonfire': (properties) => Bonfire(position: properties.position),
               'sword': (properties) => Sword(position: properties.position),
               'boots': (properties) => Boots(position: properties.position),
+              'heal': (properties) => Heal(position: properties.position),
             },
           ),
           player: Super(position: Vector2(tileSize * 20, tileSize * 31)),
@@ -107,11 +109,23 @@ class _MapRenderState extends State<MapRender> implements GameListener {
           ),
           //Joystick
           joystick: joystick,
-          lightingColorGame: Platform.isWindows ? Colors.black.withOpacity(0.3) : Colors.black.withOpacity(0.15),
+
+          interface: SuperInterface(),
+
+          gameController: controller,
+
+          components: [
+            MyGameController(),
+          ],
+
+          lightingColorGame: Platform.isWindows
+              ? Colors.black.withOpacity(0.3)
+              : Colors.black.withOpacity(0.15),
           background: BackgroundColorGame(Colors.grey[900]!),
+
           progress: Scaffold(
             body: Container(
-              color: Colors.black,
+              color: Colors.black87,
               child: const Center(
                 child: Text(
                   "Loading...",
@@ -136,4 +150,3 @@ class _MapRenderState extends State<MapRender> implements GameListener {
   @override
   void updateGame() {}
 }
-
