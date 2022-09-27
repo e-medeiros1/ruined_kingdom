@@ -1,16 +1,25 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ng_bonfire/screens/map_render.dart';
+import 'package:ng_bonfire/utils/basic_value.dart';
+import 'package:ng_bonfire/widgets/decoration/heal/heal_sprite_sheet.dart';
 import 'package:ng_bonfire/widgets/player/super/super_sprite_sheet.dart';
 import 'dart:io' show Platform;
-
+import 'dart:async' as async;
 
 double especialDamage = 50;
 double normalDamage = 25;
 
+double tileSize = BasicValues.TILE_SIZE;
+
 class Super extends SimplePlayer with ObjectCollision, Lighting {
+  double stamina = 100;
   bool lockMove = false;
+
+  async.Timer? _timerStamina;
+  bool containKey = false;
+  bool showObserveEnemy = false;
+
   Super({required Vector2 position})
       : super(
           position: position,
@@ -46,24 +55,11 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
     );
   }
 
-//Life bar
-  @override
-  void render(Canvas canvas) {
-    drawDefaultLifeBar(
-      canvas,
-      width: 45,
-      borderWidth: 1,
-      height: 4,
-      align: const Offset(90, -55),
-      borderRadius: BorderRadius.circular(3),
-    );
-    super.render(canvas);
-  }
-
   @override
   void joystickAction(JoystickActionEvent event) async {
     if (isDead || lockMove) return;
     if (event.id == 0 && event.event == ActionEvent.DOWN) {
+      if (stamina < 15) return;
       lockMove = true;
       _addAttackAnimation(() {
         lockMove = false;
@@ -75,7 +71,8 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
 
     if (event.id == LogicalKeyboardKey.space.keyId &&
         event.event == ActionEvent.DOWN) {
-          lockMove = true;
+          if (stamina < 15) return;
+      lockMove = true;
       _addAttackAnimation(() {
         lockMove = false;
       });
@@ -86,7 +83,8 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
 
     if (event.id == LogicalKeyboardKey.keyZ.keyId &&
         event.event == ActionEvent.DOWN) {
-          lockMove = true;
+          if (stamina < 50) return;
+      lockMove = true;
       _addEspecialAttackAnimation(() {
         lockMove = false;
       });
@@ -96,6 +94,7 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
     }
 
     if (event.id == 1 && event.event == ActionEvent.DOWN) {
+      if (stamina < 50) return;
       lockMove = true;
       _addEspecialAttackAnimation(() {
         lockMove = false;
@@ -111,6 +110,13 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
   @override
   void receiveDamage(AttackFromEnum attacker, double damage, dynamic identify) {
     if (!isDead) {
+      showDamage(
+        -damage,
+        config: const TextStyle(
+          fontSize: 15,
+          color: Colors.white,
+        ),
+      );
       lockMove = true;
       idle();
       _addDamageAnimation(() {
@@ -121,9 +127,11 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
   }
 
 //Normal Attack
-  _meleeAttack(VoidCallback onFinish) async {
+  void _meleeAttack(VoidCallback onFinish) async {
+    decrementStamina(15);
     lockMove = true;
     idle();
+
     await Future.delayed(const Duration(milliseconds: 300));
 
     simpleAttackMelee(
@@ -134,9 +142,12 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
   }
 
 //Especial Attack
-  _especialAttack(VoidCallback onFinish) async {
+  void _especialAttack(VoidCallback onFinish) async {
+    decrementStamina(50);
+
     lockMove = true;
     idle();
+
     await Future.delayed(const Duration(milliseconds: 500));
 
     simpleAttackMelee(
@@ -144,6 +155,42 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
         size: Vector2.all(tileSize + 20),
         withPush: true,
         sizePush: tileSize / 3);
+  }
+
+  //Stamina
+  @override
+  void update(double dt) {
+    if (isDead) return;
+    _verifyStamina();
+
+    super.update(dt);
+  }
+
+  @override
+  void render(Canvas canvas) {
+    super.render(canvas);
+  }
+
+  void _verifyStamina() {
+    if (_timerStamina == null) {
+      _timerStamina = async.Timer(const Duration(milliseconds: 150), () {
+        _timerStamina = null;
+      });
+    } else {
+      return;
+    }
+
+    stamina += 2;
+    if (stamina > 100) {
+      stamina = 100;
+    }
+  }
+
+  void decrementStamina(int i) {
+    stamina -= i;
+    if (stamina < 0) {
+      stamina = 0;
+    }
   }
 
 //Range atack
@@ -243,6 +290,7 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
 
 //DamageTaken
   void _addDamageAnimation(VoidCallback onFinish) {
+    lockMove = true;
     Future<SpriteAnimation> newAnimation;
     switch (lastDirection) {
       case Direction.left:
