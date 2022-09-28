@@ -1,8 +1,9 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
-import 'package:ng_bonfire/widgets/decoration/boots/boots_sprite_sheet.dart';
-import 'package:ng_bonfire/widgets/enemies/ghost/ghost.dart';
 import 'dart:io' show Platform;
+
+import 'package:ruined_kingdom/screens/map_render.dart';
+import 'package:ruined_kingdom/widgets/decoration/boots/boots_sprite_sheet.dart';
 
 
 class Boots extends GameDecoration with Sensor, Lighting {

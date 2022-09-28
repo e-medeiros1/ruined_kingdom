@@ -1,7 +1,7 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
-import 'package:ng_bonfire/widgets/decoration/bonfire/bonfire_sprite_sheet.dart';
-import 'package:ng_bonfire/widgets/enemies/ghost/ghost.dart';
+import 'package:ruined_kingdom/screens/map_render.dart';
+import 'package:ruined_kingdom/widgets/decoration/bonfire/bonfire_sprite_sheet.dart';
 
 class Bonfire extends GameDecoration with Sensor, Lighting, ObjectCollision {
   Bonfire({required Vector2 position})

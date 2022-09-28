@@ -1,10 +1,8 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
-import 'package:ng_bonfire/utils/basic_value.dart';
-import 'package:ng_bonfire/widgets/decoration/sword/sword_sprite_sheet.dart';
-import 'package:ng_bonfire/widgets/player/super/super.dart';
-
-double tileSize = BasicValues.TILE_SIZE;
+import 'package:ruined_kingdom/screens/map_render.dart';
+import 'package:ruined_kingdom/widgets/decoration/sword/sword_sprite_sheet.dart';
+import 'package:ruined_kingdom/widgets/player/super/super.dart';
 
 class Sword extends GameDecoration with Sensor, Lighting {
   Sword({required Vector2 position})

@@ -1,6 +1,6 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
-import 'package:ng_bonfire/widgets/player/super/super.dart';
+import 'package:ruined_kingdom/widgets/player/super/super.dart';
 
 class BarLife extends InterfaceComponent {
   double padding = 20;

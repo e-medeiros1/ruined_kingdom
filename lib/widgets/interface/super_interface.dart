@@ -1,6 +1,5 @@
 import 'package:bonfire/bonfire.dart';
-
-import 'package:ng_bonfire/widgets/interface/bar_life.dart';
+import 'package:ruined_kingdom/widgets/interface/bar_life.dart';
 
 class SuperInterface extends GameInterface {
   @override

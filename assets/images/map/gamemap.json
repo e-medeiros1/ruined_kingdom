@@ -426,8 +426,8 @@
                  "rotation":0,
                  "visible":true,
                  "width":16,
-                 "x":272.833333333333,
-                 "y":176
+                 "x":387.833333333333,
+                 "y":310.5
                 }, 
                 {
                  "class":"",
@@ -461,6 +461,17 @@
                  "width":16,
                  "x":447.833333333333,
                  "y":224.666666666667
+                }, 
+                {
+                 "class":"",
+                 "height":16,
+                 "id":27,
+                 "name":"canine",
+                 "rotation":0,
+                 "visible":true,
+                 "width":16,
+                 "x":240.5,
+                 "y":306
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -623,7 +634,7 @@
          "y":0
         }],
  "nextlayerid":21,
- "nextobjectid":27,
+ "nextobjectid":28,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.1",

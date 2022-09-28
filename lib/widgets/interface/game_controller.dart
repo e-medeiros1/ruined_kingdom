@@ -1,7 +1,7 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
-import 'package:ng_bonfire/screens/home_page.dart';
-import 'package:ng_bonfire/screens/map_render.dart';
+import 'package:ruined_kingdom/screens/home_page.dart';
+import 'package:ruined_kingdom/screens/map_render.dart';
 
 class MyGameController extends GameComponent {
   bool endGame = false;
@@ -9,7 +9,7 @@ class MyGameController extends GameComponent {
 
   @override
   void update(double dt) {
-    if (checkInterval('end game', 1000, dt)) {
+    if (checkInterval('end game', 500, dt)) {
       if ((gameRef.livingEnemies().isEmpty) && !endGame) {
         endGame = true;
         showDialog(
@@ -17,7 +17,9 @@ class MyGameController extends GameComponent {
           builder: (context) {
             return Scaffold(
               backgroundColor: Colors.transparent,
-              body: Center(
+              body: AnimatedContainer(
+                duration: const Duration(seconds: 4),
+                curve: Curves.bounceIn,
                 child: AlertDialog(
                   backgroundColor: Colors.transparent,
                   shape: RoundedRectangleBorder(
@@ -33,7 +35,7 @@ class MyGameController extends GameComponent {
                         _goHome();
                       },
                       child: const Text(
-                        'Back to home!',
+                        'Back to home',
                         style: TextStyle(fontSize: 14, color: Colors.white),
                         textAlign: TextAlign.center,
                       ),
@@ -47,41 +49,45 @@ class MyGameController extends GameComponent {
       }
     }
 
-    if (checkInterval('gameover', 1000, dt)) {
+    if (checkInterval('gameover', 500, dt)) {
       if (gameRef.player?.isDead == true && !gameOver) {
         gameOver = true;
         showDialog(
           context: context,
           builder: (context) {
             return Scaffold(
-              backgroundColor: Colors.red.shade500.withOpacity(0.15),
-              body: AlertDialog(
-                backgroundColor: Colors.transparent,
-                actionsAlignment: MainAxisAlignment.center,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
-                content: const Text(
-                  'YOU DIED!!!',
-                  style: TextStyle(color: Colors.white),
-                  textAlign: TextAlign.center,
+              backgroundColor: Colors.red.shade500.withOpacity(0.13),
+              body: AnimatedContainer(
+                duration: const Duration(seconds: 3),
+                curve: Curves.bounceIn,
+                child: AlertDialog(
+                  backgroundColor: Colors.transparent,
+                  actionsAlignment: MainAxisAlignment.center,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  content: const Text(
+                    'YOU DIED!!!',
+                    style: TextStyle(color: Colors.white),
+                    textAlign: TextAlign.center,
+                  ),
+                  alignment: Alignment.center,
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        _goHome();
+                      },
+                      child: const Text('Return to home',
+                          style: TextStyle(fontSize: 14, color: Colors.white)),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        _goStage();
+                      },
+                      child: const Text('Play again',
+                          style: TextStyle(fontSize: 14, color: Colors.blue)),
+                    ),
+                  ],
                 ),
-                alignment: Alignment.center,
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      _goHome();
-                    },
-                    child: const Text('Return to home',
-                        style: TextStyle(fontSize: 14, color: Colors.white)),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      _goStage();
-                    },
-                    child: const Text('Play again',
-                        style: TextStyle(fontSize: 14, color: Colors.blue)),
-                  ),
-                ],
               ),
             );
           },
