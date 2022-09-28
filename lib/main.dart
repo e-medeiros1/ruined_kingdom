@@ -1,26 +1,20 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ng_bonfire/screens/home_page.dart';
+import 'package:ruined_kingdom/screens/home_page.dart';
+import 'package:ruined_kingdom/utils/sounds/sounds.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-  SystemChrome.setPreferredOrientations(
-          [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight])
-      .then((_) {
-    runApp(const MyApp());
-  });
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return   MaterialApp(
-      theme: ThemeData(fontFamily: 'PressStart2P-Regular'),
-      debugShowCheckedModeBanner: false,
-      home: const  HomePage(),
-    );
+  if (!kIsWeb) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
   }
+  await Sounds.initialize();
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    theme: ThemeData(fontFamily: 'PressStart2P-Regular'),
+    home: const HomePage(),
+  ));
 }

@@ -1,16 +1,16 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ng_bonfire/utils/basic_value.dart';
-import 'package:ng_bonfire/widgets/decoration/heal/heal_sprite_sheet.dart';
-import 'package:ng_bonfire/widgets/player/super/super_sprite_sheet.dart';
+import 'package:ruined_kingdom/screens/map_render.dart';
+
 import 'dart:io' show Platform;
 import 'dart:async' as async;
 
+import 'package:ruined_kingdom/utils/sounds/sounds.dart';
+import 'package:ruined_kingdom/widgets/player/super/super_sprite_sheet.dart';
+
 double especialDamage = 50;
 double normalDamage = 25;
-
-double tileSize = BasicValues.TILE_SIZE;
 
 class Super extends SimplePlayer with ObjectCollision, Lighting {
   double stamina = 100;
@@ -71,7 +71,7 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
 
     if (event.id == LogicalKeyboardKey.space.keyId &&
         event.event == ActionEvent.DOWN) {
-          if (stamina < 15) return;
+      if (stamina < 15) return;
       lockMove = true;
       _addAttackAnimation(() {
         lockMove = false;
@@ -83,7 +83,7 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
 
     if (event.id == LogicalKeyboardKey.keyZ.keyId &&
         event.event == ActionEvent.DOWN) {
-          if (stamina < 50) return;
+      if (stamina < 50) return;
       lockMove = true;
       _addEspecialAttackAnimation(() {
         lockMove = false;
@@ -131,8 +131,8 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
     decrementStamina(15);
     lockMove = true;
     idle();
-
     await Future.delayed(const Duration(milliseconds: 300));
+    Sounds.normalAttack();
 
     simpleAttackMelee(
       damage: normalDamage,
@@ -148,7 +148,8 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
     lockMove = true;
     idle();
 
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future.delayed(const Duration(milliseconds: 400));
+    Sounds.especialAttack();
 
     simpleAttackMelee(
         damage: especialDamage,
@@ -167,6 +168,7 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
   }
 
   @override
+  // ignore: unnecessary_overrides
   void render(Canvas canvas) {
     super.render(canvas);
   }
@@ -338,6 +340,7 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
   //Die
   @override
   void die() async {
+    Sounds.superDeath();
     if (gameRef.player!.lastDirectionHorizontal == Direction.left) {
       gameRef.add(
         AnimatedObjectOnce(

@@ -2,21 +2,24 @@ import 'dart:math';
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ng_bonfire/utils/basic_value.dart';
-import 'package:ng_bonfire/widgets/decoration/bonfire/bonfire.dart';
-import 'package:ng_bonfire/widgets/decoration/boots/boots.dart';
-import 'package:ng_bonfire/widgets/decoration/heal/heal.dart';
-import 'package:ng_bonfire/widgets/decoration/potion/potion.dart';
-import 'package:ng_bonfire/widgets/decoration/sword/sword.dart';
-import 'package:ng_bonfire/widgets/enemies/boss/boss.dart';
-import 'package:ng_bonfire/widgets/enemies/canine/canine.dart';
-import 'package:ng_bonfire/widgets/enemies/deather/deather.dart';
-import 'package:ng_bonfire/widgets/enemies/firer/firer.dart';
-import 'package:ng_bonfire/widgets/enemies/ghost/ghost.dart';
-import 'package:ng_bonfire/widgets/interface/game_controller.dart';
-import 'package:ng_bonfire/widgets/interface/super_interface.dart';
-import 'package:ng_bonfire/widgets/player/super/super.dart';
+
 import 'dart:io' show Platform;
+
+import 'package:ruined_kingdom/utils/basic_value.dart';
+import 'package:ruined_kingdom/utils/sounds/sounds.dart';
+import 'package:ruined_kingdom/widgets/decoration/bonfire/bonfire.dart';
+import 'package:ruined_kingdom/widgets/decoration/boots/boots.dart';
+import 'package:ruined_kingdom/widgets/decoration/heal/heal.dart';
+import 'package:ruined_kingdom/widgets/decoration/potion/potion.dart';
+import 'package:ruined_kingdom/widgets/decoration/sword/sword.dart';
+import 'package:ruined_kingdom/widgets/enemies/boss/boss.dart';
+import 'package:ruined_kingdom/widgets/enemies/canine/canine.dart';
+import 'package:ruined_kingdom/widgets/enemies/deather/deather.dart';
+import 'package:ruined_kingdom/widgets/enemies/firer/firer.dart';
+import 'package:ruined_kingdom/widgets/enemies/ghost/ghost.dart';
+import 'package:ruined_kingdom/widgets/interface/game_controller.dart';
+import 'package:ruined_kingdom/widgets/interface/super_interface.dart';
+import 'package:ruined_kingdom/widgets/player/super/super.dart';
 
 class MapRender extends StatefulWidget {
   const MapRender({super.key});
@@ -25,14 +28,22 @@ class MapRender extends StatefulWidget {
   State<MapRender> createState() => _MapRenderState();
 }
 
+double tileSize = BasicValues.TILE_SIZE;
+
 class _MapRenderState extends State<MapRender> implements GameListener {
-  double tileSize = BasicValues.TILE_SIZE;
   late GameController controller;
 
   @override
   void initState() {
     controller = GameController()..addListener(this);
+    Sounds.playBackgroundSound();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    Sounds.stopBackgroundSound();
+    super.dispose();
   }
 
   @override
@@ -50,18 +61,17 @@ class _MapRenderState extends State<MapRender> implements GameListener {
       actions: [
         JoystickAction(
           actionId: 0,
-          sprite: Sprite.load('decoration/joystick_atack.png'),
-          spritePressed: Sprite.load('decoration/joystick_atack_selected.png'),
+          sprite: Sprite.load('decoration/red_button.png'),
+          spritePressed: Sprite.load('decoration/red_button_pressed.png'),
           size: 80,
-          margin: const EdgeInsets.only(bottom: 50, right: 50),
+          margin: const EdgeInsets.only(bottom: 60, right: 50),
         ),
         JoystickAction(
           actionId: 1,
-          sprite: Sprite.load('decoration/joystick_atack_range.png'),
-          spritePressed:
-              Sprite.load('decoration/joystick_atack_range_selected.png'),
-          size: 50,
-          margin: const EdgeInsets.only(bottom: 50, right: 160),
+          sprite: Sprite.load('decoration/blue_button.png'),
+          spritePressed: Sprite.load('decoration/blue_button_pressed.png'),
+          size: 55,
+          margin: const EdgeInsets.only(bottom: 50, right: 150),
         )
       ],
     );
@@ -84,6 +94,7 @@ class _MapRenderState extends State<MapRender> implements GameListener {
         height: sizeScreen,
         child: BonfireWidget(
           showCollisionArea: false,
+          //Map
           map: WorldMapByTiled(
             'map/gamemap.json',
             forceTileSize: Vector2.all(tileSize),
@@ -100,13 +111,16 @@ class _MapRenderState extends State<MapRender> implements GameListener {
               'heal': (properties) => Heal(position: properties.position),
             },
           ),
+          //Player
           player: Super(position: Vector2(tileSize * 20, tileSize * 31)),
+
           //Camera
           cameraConfig: CameraConfig(
             moveOnlyMapArea: false,
             zoom: 1.4,
             sizeMovementWindow: Vector2(15, 15),
           ),
+
           //Joystick
           joystick: joystick,
 
@@ -119,13 +133,14 @@ class _MapRenderState extends State<MapRender> implements GameListener {
           ],
 
           lightingColorGame: Platform.isWindows
-              ? Colors.black.withOpacity(0.3)
+              ? Colors.black.withOpacity(0.25)
               : Colors.black.withOpacity(0.15),
+
           background: BackgroundColorGame(Colors.grey[900]!),
 
           progress: Scaffold(
             body: Container(
-              color: Colors.black87,
+              color: Colors.black,
               child: const Center(
                 child: Text(
                   "Loading...",

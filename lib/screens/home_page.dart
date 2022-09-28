@@ -4,10 +4,11 @@ import 'dart:async' as async;
 
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
-import 'package:ng_bonfire/screens/map_render.dart';
-import 'package:ng_bonfire/widgets/enemies/boss/boss_sprite_sheet.dart';
-import 'package:ng_bonfire/widgets/enemies/firer/firer_sprite_sheet.dart';
-import 'package:ng_bonfire/widgets/player/super/super_sprite_sheet.dart';
+import 'package:ruined_kingdom/screens/map_render.dart';
+import 'package:ruined_kingdom/utils/sounds/sounds.dart';
+import 'package:ruined_kingdom/widgets/enemies/boss/boss_sprite_sheet.dart';
+import 'package:ruined_kingdom/widgets/enemies/firer/firer_sprite_sheet.dart';
+import 'package:ruined_kingdom/widgets/player/super/super_sprite_sheet.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:io' show Platform;
 
@@ -43,11 +44,13 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  @override
+    @override
   void dispose() {
+    Sounds.stopBackgroundSound();
     _timer.cancel();
     super.dispose();
   }
+
 
   @override
   Widget build(BuildContext context) {

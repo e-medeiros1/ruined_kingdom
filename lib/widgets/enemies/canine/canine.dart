@@ -1,10 +1,8 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
-import 'package:ng_bonfire/utils/basic_value.dart';
-import 'package:ng_bonfire/widgets/enemies/canine/canine_sprite_sheet.dart';
-// import 'dart:io' show Platform;
-
-const tileSize = BasicValues.TILE_SIZE;
+import 'package:ruined_kingdom/screens/map_render.dart';
+import 'package:ruined_kingdom/utils/sounds/sounds.dart';
+import 'package:ruined_kingdom/widgets/enemies/canine/canine_sprite_sheet.dart';
 
 class Canine extends SimpleEnemy
     with ObjectCollision, Lighting, AutomaticRandomMovement {
@@ -100,7 +98,7 @@ class Canine extends SimpleEnemy
       showDamage(
         -damage,
         initVelocityTop: -5,
-        config: const TextStyle(
+        config: TextStyle(
           color: Colors.white,
           fontSize: tileSize / 2,
         ),
@@ -226,6 +224,7 @@ class Canine extends SimpleEnemy
   //Die
   @override
   void die() {
+    Sounds.canineDeath();
     if (gameRef.player!.lastDirectionHorizontal == Direction.left) {
       gameRef.add(
         AnimatedObjectOnce(

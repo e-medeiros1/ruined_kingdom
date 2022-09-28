@@ -1,11 +1,11 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
-import 'package:ng_bonfire/utils/basic_value.dart';
-import 'package:ng_bonfire/widgets/enemies/deather/deather_sprite_sheet.dart';
+import 'package:ruined_kingdom/screens/map_render.dart';
+import 'package:ruined_kingdom/utils/sounds/sounds.dart';
+import 'package:ruined_kingdom/widgets/enemies/deather/deather_sprite_sheet.dart';
 
-const tileSize = BasicValues.TILE_SIZE;
-
-class Deather extends SimpleEnemy with ObjectCollision, Lighting, AutomaticRandomMovement {
+class Deather extends SimpleEnemy
+    with ObjectCollision, Lighting, AutomaticRandomMovement {
   bool canMove = true;
   Deather({required Vector2 position})
       : super(
@@ -64,7 +64,7 @@ class Deather extends SimpleEnemy with ObjectCollision, Lighting, AutomaticRando
   }
 
 //Ataca ao ver
-   @override
+  @override
   void update(double dt) {
     if (canMove) {
       seePlayer(
@@ -84,7 +84,7 @@ class Deather extends SimpleEnemy with ObjectCollision, Lighting, AutomaticRando
           );
         },
         notObserved: () {
-           runRandomMovement(dt, speed: 15, maxDistance: 50);
+          runRandomMovement(dt, speed: 15, maxDistance: 50);
         },
         radiusVision: tileSize * 8,
       );
@@ -108,8 +108,7 @@ class Deather extends SimpleEnemy with ObjectCollision, Lighting, AutomaticRando
     super.receiveDamage(attacker, damage, identify);
   }
 
-  void _execAttack()  {
-  
+  void _execAttack() {
     simpleAttackMelee(
       withPush: false,
       damage: 40,
@@ -224,6 +223,7 @@ class Deather extends SimpleEnemy with ObjectCollision, Lighting, AutomaticRando
 //Death
   @override
   void die() {
+    Sounds.deatherDeath();
     if (gameRef.player!.lastDirectionHorizontal == Direction.left) {
       gameRef.add(
         AnimatedObjectOnce(

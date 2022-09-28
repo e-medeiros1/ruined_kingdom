@@ -1,11 +1,11 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
-import 'package:ng_bonfire/utils/basic_value.dart';
-import 'package:ng_bonfire/widgets/enemies/ghost/ghost_sprite_sheet.dart';
+import 'package:ruined_kingdom/screens/map_render.dart';
+import 'package:ruined_kingdom/utils/sounds/sounds.dart';
+import 'package:ruined_kingdom/widgets/enemies/ghost/ghost_sprite_sheet.dart';
 
-const tileSize = BasicValues.TILE_SIZE;
-
-class Ghost extends SimpleEnemy with ObjectCollision, Lighting, AutomaticRandomMovement {
+class Ghost extends SimpleEnemy
+    with ObjectCollision, Lighting, AutomaticRandomMovement {
   bool canMove = true;
   Ghost({required Vector2 position})
       : super(
@@ -84,7 +84,7 @@ class Ghost extends SimpleEnemy with ObjectCollision, Lighting, AutomaticRandomM
           );
         },
         notObserved: () {
-           runRandomMovement(dt, speed: 25, maxDistance: 50);
+          runRandomMovement(dt, speed: 25, maxDistance: 50);
         },
         radiusVision: tileSize * 8,
       );
@@ -108,8 +108,7 @@ class Ghost extends SimpleEnemy with ObjectCollision, Lighting, AutomaticRandomM
     super.receiveDamage(attacker, damage, identify);
   }
 
-  void _execAttack()  {
-  
+  void _execAttack() {
     simpleAttackMelee(
       withPush: false,
       damage: 40,
@@ -224,6 +223,7 @@ class Ghost extends SimpleEnemy with ObjectCollision, Lighting, AutomaticRandomM
 //Death
   @override
   void die() {
+    Sounds.ghostDeath();
     if (gameRef.player!.lastDirectionHorizontal == Direction.left) {
       gameRef.add(
         AnimatedObjectOnce(
