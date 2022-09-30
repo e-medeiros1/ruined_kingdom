@@ -1,12 +1,15 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:ruined_kingdom/screens/map_render.dart';
 import 'package:ruined_kingdom/utils/sounds/sounds.dart';
 import 'package:ruined_kingdom/widgets/enemies/boss/boss_sprite_sheet.dart';
+import 'package:ruined_kingdom/widgets/player/super/super_sprite_sheet.dart';
 
 class Boss extends SimpleEnemy
     with ObjectCollision, Lighting, AutomaticRandomMovement {
   bool canMove = true;
+  bool firstSeePlayer = false;
   Boss({required Vector2 position})
       : super(
           life: 600,
@@ -69,6 +72,14 @@ class Boss extends SimpleEnemy
     if (canMove) {
       seePlayer(
         observed: (player) {
+          firstSeePlayer = true;
+          gameRef.camera.moveToTargetAnimated(
+            this,
+            zoom: 2,
+            finish: () {
+              _bossConversation();
+            },
+          );
           seeAndMoveToPlayer(
             closePlayer: (player) {
               followComponent(
@@ -245,5 +256,42 @@ class Boss extends SimpleEnemy
     }
     removeFromParent();
     super.die();
+  }
+
+  //Dialogs
+
+  void _bossConversation() {
+    TalkDialog.show(
+      gameRef.context,
+      [
+        Say(
+          text: [const TextSpan(text: 'YOU WILL NOT SURVIVE HAHAHA')],
+          person: SizedBox(
+            width: 100,
+            height: 100,
+            child: BossSpriteSheet.bossIdleRight.asWidget(),
+          ),
+          personSayDirection: PersonSayDirection.RIGHT,
+        ),
+        Say(
+          text: [const TextSpan(text: 'We will see! This is my revenge!')],
+          personSayDirection: PersonSayDirection.LEFT,
+          person: SizedBox(
+            width: 100,
+            height: 100,
+            child: SuperSpriteSheet.superIdleRight.asWidget(),
+          ),
+        ),
+      ],
+      onFinish: () {
+        Future.delayed(const Duration(milliseconds: 500), () {
+          gameRef.camera.moveToPlayerAnimated();
+          Sounds.playBackgroundBoosSound();
+        });
+      },
+      logicalKeyboardKeysToNext: [
+        LogicalKeyboardKey.space,
+      ],
+    );
   }
 }
