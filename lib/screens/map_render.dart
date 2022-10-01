@@ -9,6 +9,8 @@ import 'package:ruined_kingdom/utils/basic_value.dart';
 import 'package:ruined_kingdom/utils/sounds/sounds.dart';
 import 'package:ruined_kingdom/widgets/decoration/bonfire/bonfire.dart';
 import 'package:ruined_kingdom/widgets/decoration/boots/boots.dart';
+import 'package:ruined_kingdom/widgets/decoration/dialogs/first_board/first_board.dart';
+import 'package:ruined_kingdom/widgets/decoration/dialogs/second_board/second_board.dart';
 import 'package:ruined_kingdom/widgets/decoration/heal/heal.dart';
 import 'package:ruined_kingdom/widgets/decoration/potion/potion.dart';
 import 'package:ruined_kingdom/widgets/decoration/sword/sword.dart';
@@ -36,13 +38,11 @@ class _MapRenderState extends State<MapRender> implements GameListener {
   @override
   void initState() {
     controller = GameController()..addListener(this);
-    Sounds.playBackgroundSound();
     super.initState();
   }
 
   @override
   void dispose() {
-    Sounds.stopBackgroundSound();
     super.dispose();
   }
 
@@ -106,9 +106,11 @@ class _MapRenderState extends State<MapRender> implements GameListener {
               'boss': (properties) => Boss(position: properties.position),
               'potion': (properties) => Potion(position: properties.position),
               'bonfire': (properties) => Bonfire(position: properties.position),
-              'sword': (properties) => Sword(position: properties.position),
-              'boots': (properties) => Boots(position: properties.position),
+              // 'sword': (properties) => Sword(position: properties.position),
+              // 'boots': (properties) => Boots(position: properties.position),
               'heal': (properties) => Heal(position: properties.position),
+              'board1': (properties) => FirstBoard(position: properties.position),
+              'board2': (properties) => SecondBoard(position: properties.position),
             },
           ),
           //Player

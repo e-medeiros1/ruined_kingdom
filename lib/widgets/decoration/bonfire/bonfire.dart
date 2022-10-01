@@ -11,7 +11,7 @@ class Bonfire extends GameDecoration with Sensor, Lighting, ObjectCollision {
             size: Vector2(tileSize * 2, tileSize * 2)) {
     setupSensorArea(areaSensor: [
       CollisionArea.rectangle(
-        size: Vector2(tileSize * 2, tileSize),
+        size: Vector2(tileSize * 2, tileSize * 1.5),
         align: Vector2(5, 30),
       ),
     ]);

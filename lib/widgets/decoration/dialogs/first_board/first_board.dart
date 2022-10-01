@@ -2,7 +2,6 @@ import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ruined_kingdom/screens/map_render.dart';
-import 'package:ruined_kingdom/widgets/player/super/super_sprite_sheet.dart';
 
 class FirstBoard extends GameDecoration with TapGesture {
   FirstBoard({required Vector2 position})
@@ -19,19 +18,13 @@ class FirstBoard extends GameDecoration with TapGesture {
         Say(
           text: [
             const TextSpan(
-              text:
-                  'Maybe you are the only hope for this place.\n',
-            ),
+                text: 'Maybe you are the only hope for this place.\n\n',
+                style: TextStyle(fontFamily: 'PressStart2P-Regular')),
             const TextSpan(
-              text: 'Use all of your resources, we left a BONFIRE behind for you!\n',
-            ),
+                text:
+                    'Use all of your resources, we left a BONFIRE behind for you!\n',
+                style: TextStyle(fontFamily: 'PressStart2P-Regular')),
           ],
-          personSayDirection: PersonSayDirection.LEFT,
-          person: SizedBox(
-            width: 100,
-            height: 100,
-            child: SuperSpriteSheet.superIdleRight.asWidget(),
-          ),
         ),
       ],
       logicalKeyboardKeysToNext: [

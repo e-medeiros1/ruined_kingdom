@@ -2,10 +2,9 @@ import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ruined_kingdom/screens/map_render.dart';
-import 'package:ruined_kingdom/widgets/player/super/super_sprite_sheet.dart';
 
-class FirstBoard extends GameDecoration with TapGesture {
-  FirstBoard({required Vector2 position})
+class SecondBoard extends GameDecoration with TapGesture {
+  SecondBoard({required Vector2 position})
       : super(
           position: position,
           size: Vector2(tileSize, tileSize),
@@ -19,19 +18,12 @@ class FirstBoard extends GameDecoration with TapGesture {
         Say(
           text: [
             const TextSpan(
-              text:
-                  'A major battle is approaching\n',
-            ),
+                text: 'A major battle is approaching\n\n',
+                style: TextStyle(fontFamily: 'PressStart2P-Regular')),
             const TextSpan(
-              text: 'There may be only one way out...\n',
-            ),
+                text: 'There may be only one way out...\n',
+                style: TextStyle(fontFamily: 'PressStart2P-Regular')),
           ],
-          personSayDirection: PersonSayDirection.LEFT,
-          person: SizedBox(
-            width: 100,
-            height: 100,
-            child: SuperSpriteSheet.superIdleRight.asWidget(),
-          ),
         ),
       ],
       logicalKeyboardKeysToNext: [

@@ -5,7 +5,6 @@ import 'dart:async' as async;
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:ruined_kingdom/screens/map_render.dart';
-import 'package:ruined_kingdom/utils/sounds/sounds.dart';
 import 'package:ruined_kingdom/widgets/enemies/boss/boss_sprite_sheet.dart';
 import 'package:ruined_kingdom/widgets/enemies/firer/firer_sprite_sheet.dart';
 import 'package:ruined_kingdom/widgets/player/super/super_sprite_sheet.dart';
@@ -46,7 +45,6 @@ class _HomePageState extends State<HomePage> {
 
     @override
   void dispose() {
-    Sounds.stopBackgroundSound();
     _timer.cancel();
     super.dispose();
   }

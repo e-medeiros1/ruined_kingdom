@@ -632,9 +632,53 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":21,
+         "name":"board1",
+         "objects":[
+                {
+                 "class":"",
+                 "height":0,
+                 "id":28,
+                 "name":"board1",
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":463.5,
+                 "y":489
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":22,
+         "name":"board2",
+         "objects":[
+                {
+                 "class":"",
+                 "height":16,
+                 "id":29,
+                 "name":"board2",
+                 "rotation":0,
+                 "visible":true,
+                 "width":23.25,
+                 "x":803.5,
+                 "y":257.25
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":21,
- "nextobjectid":28,
+ "nextlayerid":23,
+ "nextobjectid":30,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.1",

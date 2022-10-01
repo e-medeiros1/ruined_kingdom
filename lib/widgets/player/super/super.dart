@@ -25,7 +25,7 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
           position: position,
           life: 300,
           size: Vector2(tileSize * 7, tileSize * 7),
-          speed: Platform.isAndroid ? 130 : 150,
+          speed: Platform.isAndroid ? 130 : 160,
           animation: SimpleDirectionAnimation(
             idleRight: SuperSpriteSheet.superIdleRight,
             idleLeft: SuperSpriteSheet.superIdleLeft,
@@ -364,4 +364,38 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
     removeFromParent();
     super.die();
   }
+
+  //   void _superConversation() {
+  //   TalkDialog.show(
+  //     gameRef.context,
+  //     [
+  //       Say(
+  //         text: [const TextSpan(text: 'Oh Jesus, what happened to this place??? I used to play arround here... With my people...')],
+  //         person: SizedBox(
+  //           width: 100,
+  //           height: 100,
+  //           child: SuperSpriteSheet.superIdleRight.asWidget(),
+  //         ),
+  //         personSayDirection: PersonSayDirection.RIGHT,
+  //       ),
+  //       Say(
+  //         text: [const TextSpan(text: 'AAAAAAH! I will kill all these monsters!')],
+  //         personSayDirection: PersonSayDirection.RIGHT,
+  //         person: SizedBox(
+  //           width: 100,
+  //           height: 100,
+  //           child: SuperSpriteSheet.superIdleRight.asWidget(),
+  //         ),
+  //       ),
+  //     ],
+  //     onFinish: () {
+  //       Future.delayed(const Duration(milliseconds: 500), () {
+  //         gameRef.camera.moveToPlayerAnimated();
+  //       });
+  //     },
+  //     logicalKeyboardKeysToNext: [
+  //       LogicalKeyboardKey.space,
+  //     ],
+  //   );
+  // }
 }

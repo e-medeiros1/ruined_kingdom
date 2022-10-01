@@ -9,7 +9,7 @@ class MyGameController extends GameComponent {
 
   @override
   void update(double dt) {
-    if (checkInterval('end game', 500, dt)) {
+    if (checkInterval('end game', 5000, dt)) {
       if ((gameRef.livingEnemies().isEmpty) && !endGame) {
         endGame = true;
         showDialog(
@@ -49,7 +49,7 @@ class MyGameController extends GameComponent {
       }
     }
 
-    if (checkInterval('gameover', 500, dt)) {
+    if (checkInterval('gameover', 5000, dt)) {
       if (gameRef.player?.isDead == true && !gameOver) {
         gameOver = true;
         showDialog(

@@ -49,10 +49,10 @@ class Sounds {
   }
 
   //Game sounds
-  static void playBackgroundSound() async {
-    await FlameAudio.bgm.stop();
-    FlameAudio.bgm.play('sound_bg.mp3', volume: 0.1);
-  }
+  // static void playBackgroundSound() async {
+  //   await FlameAudio.bgm.stop();
+  //   FlameAudio.bgm.play('sound_bg.mp3', volume: 0.1);
+  // }
 
   static void playBackgroundBoosSound() {
     FlameAudio.bgm.play('battle_boss.mp3');
