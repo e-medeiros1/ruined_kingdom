@@ -6,14 +6,11 @@ import 'package:flutter/services.dart';
 import 'dart:io' show Platform;
 
 import 'package:ruined_kingdom/utils/basic_value.dart';
-import 'package:ruined_kingdom/utils/sounds/sounds.dart';
 import 'package:ruined_kingdom/widgets/decoration/bonfire/bonfire.dart';
-import 'package:ruined_kingdom/widgets/decoration/boots/boots.dart';
 import 'package:ruined_kingdom/widgets/decoration/dialogs/first_board/first_board.dart';
 import 'package:ruined_kingdom/widgets/decoration/dialogs/second_board/second_board.dart';
 import 'package:ruined_kingdom/widgets/decoration/heal/heal.dart';
 import 'package:ruined_kingdom/widgets/decoration/potion/potion.dart';
-import 'package:ruined_kingdom/widgets/decoration/sword/sword.dart';
 import 'package:ruined_kingdom/widgets/enemies/boss/boss.dart';
 import 'package:ruined_kingdom/widgets/enemies/canine/canine.dart';
 import 'package:ruined_kingdom/widgets/enemies/deather/deather.dart';
