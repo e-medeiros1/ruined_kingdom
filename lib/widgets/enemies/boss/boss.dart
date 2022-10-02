@@ -69,37 +69,31 @@ class Boss extends SimpleEnemy
 //Ataca ao ver
   @override
   void update(double dt) {
-    if (canMove) {
+    if (!firstSeePlayer) {
       seePlayer(
-        observed: (player) {
+        observed: (p) {
           firstSeePlayer = true;
           gameRef.camera.moveToTargetAnimated(
             this,
-            zoom: 2,
+            zoom: 0.5,
             finish: () {
               _bossConversation();
             },
           );
-          seeAndMoveToPlayer(
-            closePlayer: (player) {
-              followComponent(
-                margin: tileSize,
-                player,
-                dt,
-                closeComponent: (player) => _execAttack(),
-              );
-            },
-            radiusVision: tileSize * 8,
-            runOnlyVisibleInScreen: true,
-            margin: tileSize,
-          );
         },
-        notObserved: () {
-          runRandomMovement(dt, speed: 20, maxDistance: 40);
-        },
-        radiusVision: tileSize * 8,
+        radiusVision: tileSize * 6,
       );
     }
+
+    seeAndMoveToPlayer(
+      runOnlyVisibleInScreen: true,
+      notObserved: () {
+        runRandomMovement(dt, speed: 20, maxDistance: 40);
+      },
+      closePlayer: (player) => _execAttack(),
+      radiusVision: tileSize * 6,
+    );
+
     super.update(dt);
   }
 
@@ -265,28 +259,37 @@ class Boss extends SimpleEnemy
       gameRef.context,
       [
         Say(
-          text: [const TextSpan(text: 'YOU WILL NOT SURVIVE HAHAHA')],
+          text: [
+            const TextSpan(
+                text: 'YOU WILL NOT SURVIVE HAHAHA',
+                style: TextStyle(fontFamily: 'PressStart2P-Regular'))
+          ],
           person: SizedBox(
-            width: 100,
-            height: 100,
+            width: 250,
+            height: 250,
             child: BossSpriteSheet.bossIdleRight.asWidget(),
           ),
-          personSayDirection: PersonSayDirection.RIGHT,
+          personSayDirection: PersonSayDirection.LEFT,
         ),
         Say(
-          text: [const TextSpan(text: 'We will see! This is my revenge!')],
-          personSayDirection: PersonSayDirection.LEFT,
+          text: [
+            const TextSpan(
+                text: 'We will see! THIS IS MY REVENGE!',
+                style: TextStyle(fontFamily: 'PressStart2P-Regular'))
+          ],
+          personSayDirection: PersonSayDirection.RIGHT,
           person: SizedBox(
-            width: 100,
-            height: 100,
-            child: SuperSpriteSheet.superIdleRight.asWidget(),
+            width: 250,
+            height: 250,
+            child: SuperSpriteSheet.superIdleLeft.asWidget(),
           ),
         ),
       ],
       onFinish: () {
-        Future.delayed(const Duration(milliseconds: 500), () {
+        Future.delayed(const Duration(milliseconds: 1000), () {
           gameRef.camera.moveToPlayerAnimated();
           Sounds.playBackgroundBoosSound();
+
         });
       },
       logicalKeyboardKeysToNext: [

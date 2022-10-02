@@ -6,7 +6,6 @@ class Sounds {
     await FlameAudio.audioCache.loadAll([
       'normal_attack.wav',
       'especial_attack.mp3',
-      'super_death.wav',
     ]);
   }
 
@@ -54,8 +53,9 @@ class Sounds {
   //   FlameAudio.bgm.play('sound_bg.mp3', volume: 0.1);
   // }
 
-  static void playBackgroundBoosSound() {
-    FlameAudio.bgm.play('battle_boss.mp3');
+  static void playBackgroundBoosSound() async {
+    await FlameAudio.bgm.stop();
+    FlameAudio.bgm.play('battle_boss.mp3', volume: 0.1);
   }
 
   static void pauseBackgroundSound() {
