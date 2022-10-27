@@ -43,27 +43,13 @@ class Sounds {
     FlameAudio.play('firer_death.wav', volume: 0.3);
   }
 
-  static stopBackgroundSound() {
-    return FlameAudio.bgm.stop();
+  static stopBackgroundBossSound() {
+    return FlameAudio.bgm.pause();
   }
 
-  //Game sounds
-  // static void playBackgroundSound() async {
-  //   await FlameAudio.bgm.stop();
-  //   FlameAudio.bgm.play('sound_bg.mp3', volume: 0.1);
-  // }
-
-  static void playBackgroundBoosSound() async {
+  static void playBackgroundBossSound() async {
     await FlameAudio.bgm.stop();
     FlameAudio.bgm.play('battle_boss.mp3', volume: 0.1);
-  }
-
-  static void pauseBackgroundSound() {
-    FlameAudio.bgm.pause();
-  }
-
-  static void resumeBackgroundSound() {
-    FlameAudio.bgm.resume();
   }
 
   static void dispose() {

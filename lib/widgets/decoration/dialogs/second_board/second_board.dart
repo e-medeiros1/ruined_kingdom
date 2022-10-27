@@ -3,17 +3,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ruined_kingdom/screens/map_render.dart';
 
-class SecondBoard extends GameDecoration with TapGesture {
+class SecondBoard extends GameDecoration with Sensor {
   SecondBoard({required Vector2 position})
-      : super(
-          position: position,
-          size: Vector2(tileSize, tileSize),
-        );
-
+      : super(position: position, size: Vector2.all(tileSize * 2)) {
+    setupSensorArea(areaSensor: [
+      CollisionArea.rectangle(
+        size: Vector2(tileSize * 3, tileSize * 3),
+        align: Vector2(-30, -30),
+      ),
+    ]);
+  }
   @override
-  void onTap() {
+  void onContact(GameComponent component) {
+    if (component is Player) {
+      _boardTalk();
+      removeFromParent();
+    } else if (component is Enemy) {
+      null;
+    }
+  }
+
+  void _boardTalk() {
     TalkDialog.show(
-      context,
+      gameRef.context,
       [
         Say(
           text: [
