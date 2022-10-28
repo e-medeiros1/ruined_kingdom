@@ -71,7 +71,6 @@ flutter:
     - assets/images/enemies/ghost/
     - assets/images/enemies/deather/
     - assets/images/hero/
-    - assets/images/hero/warrior/
     - assets/images/hero/super/
     - assets/audio/
   
