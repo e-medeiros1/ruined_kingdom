@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:ruined_kingdom/screens/map_render.dart';
 import 'package:ruined_kingdom/utils/sounds/sounds.dart';
 import 'package:ruined_kingdom/widgets/enemies/boss/boss_sprite_sheet.dart';
-import 'package:ruined_kingdom/widgets/player/super/super_sprite_sheet.dart';
 
 class Boss extends SimpleEnemy
     with ObjectCollision, Lighting, AutomaticRandomMovement {
@@ -35,6 +34,7 @@ class Boss extends SimpleEnemy
         ],
       ),
     );
+//Spotlight
     setupLighting(
       LightingConfig(
           radius: tileSize * 2,
@@ -69,34 +69,40 @@ class Boss extends SimpleEnemy
 //Ataca ao ver
   @override
   void update(double dt) {
-    if (!firstSeePlayer) {
+    if (!firstSeePlayer && canMove) {
       seePlayer(
         observed: (p) {
           firstSeePlayer = true;
           gameRef.camera.moveToTargetAnimated(
             this,
-            zoom: 0.5,
+            zoom: 2.0,
             finish: () {
               _bossConversation();
             },
           );
         },
-        radiusVision: tileSize * 6,
+        notObserved: () {
+          runRandomMovement(dt, speed: 20, maxDistance: 50);
+        },
+        radiusVision: tileSize * 7,
       );
     }
-
     seeAndMoveToPlayer(
-      runOnlyVisibleInScreen: true,
-      notObserved: () {
-        runRandomMovement(dt, speed: 20, maxDistance: 40);
+      closePlayer: (player) {
+        followComponent(
+          margin: tileSize,
+          player,
+          dt,
+          closeComponent: (player) => execAttack(),
+        );
       },
-      closePlayer: (player) => _execAttack(),
-      radiusVision: tileSize * 6,
+      radiusVision: tileSize * 5,
+      runOnlyVisibleInScreen: true,
     );
-
     super.update(dt);
   }
 
+//Dano recebido
   @override
   void receiveDamage(AttackFromEnum attacker, double damage, identify) {
     if (!isDead) {
@@ -113,12 +119,13 @@ class Boss extends SimpleEnemy
     super.receiveDamage(attacker, damage, identify);
   }
 
-  void _execAttack() {
+//Ataque básico
+  void execAttack() {
     simpleAttackMelee(
       withPush: false,
       damage: 30,
-      size: Vector2.all(tileSize * 1.3),
-      interval: 500,
+      size: Vector2.all(tileSize * 2),
+      interval: 800,
       execute: () {
         _addBossAttackAnimation();
       },
@@ -171,14 +178,14 @@ class Boss extends SimpleEnemy
 
     animation!.playOnce(
       newAnimation,
-      runToTheEnd: false,
+      runToTheEnd: true,
       onFinish: (() {
         canMove = true;
       }),
     );
   }
 
-//Damage taken
+//Animação de dano recebido
   void _addDamageAnimation() {
     canMove = false;
     Future<SpriteAnimation> newAnimation;
@@ -228,6 +235,7 @@ class Boss extends SimpleEnemy
 //Death
   @override
   void die() {
+    Sounds.stopBackgroundBossSound();
     Sounds.bossDeath();
     if (gameRef.player!.lastDirectionHorizontal == Direction.left) {
       gameRef.add(
@@ -253,8 +261,8 @@ class Boss extends SimpleEnemy
   }
 
   //Dialogs
-
   void _bossConversation() {
+    canMove = false;
     TalkDialog.show(
       gameRef.context,
       [
@@ -264,32 +272,20 @@ class Boss extends SimpleEnemy
                 text: 'YOU WILL NOT SURVIVE HAHAHA',
                 style: TextStyle(fontFamily: 'PressStart2P-Regular'))
           ],
-          person: SizedBox(
-            width: 250,
-            height: 250,
-            child: BossSpriteSheet.bossIdleRight.asWidget(),
-          ),
+          person: BossSpriteSheet.bossIdleRight
+              .asWidget(anchor: Anchor.bottomCenter),
           personSayDirection: PersonSayDirection.LEFT,
-        ),
-        Say(
-          text: [
-            const TextSpan(
-                text: 'We will see! THIS IS MY REVENGE!',
-                style: TextStyle(fontFamily: 'PressStart2P-Regular'))
-          ],
-          personSayDirection: PersonSayDirection.RIGHT,
-          person: SizedBox(
-            width: 250,
-            height: 250,
-            child: SuperSpriteSheet.superIdleLeft.asWidget(),
-          ),
         ),
       ],
       onFinish: () {
         Future.delayed(const Duration(milliseconds: 1000), () {
-          gameRef.camera.moveToPlayerAnimated();
-          Sounds.playBackgroundBoosSound();
-
+          gameRef.camera.moveToPlayerAnimated(
+            zoom: 1.3,
+            finish: () {
+              canMove = true;
+              Sounds.playBackgroundBossSound();
+            },
+          );
         });
       },
       logicalKeyboardKeysToNext: [
