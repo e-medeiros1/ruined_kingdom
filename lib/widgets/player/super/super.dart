@@ -1,21 +1,19 @@
+import 'dart:async' as async;
+import 'dart:io' show Platform;
+
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ruined_kingdom/screens/map_render.dart';
-
-import 'dart:io' show Platform;
-import 'dart:async' as async;
-
 import 'package:ruined_kingdom/utils/sounds/sounds.dart';
 import 'package:ruined_kingdom/widgets/player/super/super_sprite_sheet.dart';
 
-double especialDamage = 50;
-double normalDamage = 25;
+bool lockMove = false;
 
 class Super extends SimplePlayer with ObjectCollision, Lighting {
   double stamina = 100;
-  bool lockMove = false;
-
+  double especialDamage = 50;
+  double normalDamage = 25;
   async.Timer? _timerStamina;
   bool containKey = false;
   bool showObserveEnemy = false;
@@ -33,17 +31,19 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
             runLeft: SuperSpriteSheet.superRunLeft,
           ),
         ) {
-//CollisionConfig
+//Collision config
     setupCollision(
       CollisionConfig(
         collisions: [
           CollisionArea.rectangle(
-            size: Vector2(16, 35),
-            align: Vector2(100, 105),
+            size: Vector2(20, 40),
+            align: Vector2(100, 95),
           ),
         ],
       ),
     );
+
+//Light config
     setupLighting(
       LightingConfig(
         radius: tileSize,
@@ -110,13 +110,6 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
   @override
   void receiveDamage(AttackFromEnum attacker, double damage, dynamic identify) {
     if (!isDead) {
-      showDamage(
-        -damage,
-        config: const TextStyle(
-          fontSize: 15,
-          color: Colors.white,
-        ),
-      );
       lockMove = true;
       idle();
       _addDamageAnimation(() {
@@ -131,6 +124,7 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
     decrementStamina(15);
     lockMove = true;
     idle();
+
     await Future.delayed(const Duration(milliseconds: 300));
     Sounds.normalAttack();
 
@@ -195,10 +189,11 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
     }
   }
 
-//Range atack
+//Range atack animation
   void _addEspecialAttackAnimation(VoidCallback onFinish) {
     lockMove = true;
     idle();
+
     Future<SpriteAnimation> newAnimation;
     switch (lastDirectionHorizontal) {
       case Direction.left:
@@ -243,7 +238,7 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
     );
   }
 
-//Attack animation
+//Normal attack animation
   void _addAttackAnimation(VoidCallback onFinish) {
     lockMove = true;
     Future<SpriteAnimation> newAnimation;
@@ -341,6 +336,7 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
   @override
   void die() async {
     Sounds.superDeath();
+    Sounds.stopBackgroundBossSound();
     if (gameRef.player!.lastDirectionHorizontal == Direction.left) {
       gameRef.add(
         AnimatedObjectOnce(
@@ -364,38 +360,4 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
     removeFromParent();
     super.die();
   }
-
-  //   void _superConversation() {
-  //   TalkDialog.show(
-  //     gameRef.context,
-  //     [
-  //       Say(
-  //         text: [const TextSpan(text: 'Oh Jesus, what happened to this place??? I used to play arround here... With my people...')],
-  //         person: SizedBox(
-  //           width: 100,
-  //           height: 100,
-  //           child: SuperSpriteSheet.superIdleRight.asWidget(),
-  //         ),
-  //         personSayDirection: PersonSayDirection.RIGHT,
-  //       ),
-  //       Say(
-  //         text: [const TextSpan(text: 'AAAAAAH! I will kill all these monsters!')],
-  //         personSayDirection: PersonSayDirection.RIGHT,
-  //         person: SizedBox(
-  //           width: 100,
-  //           height: 100,
-  //           child: SuperSpriteSheet.superIdleRight.asWidget(),
-  //         ),
-  //       ),
-  //     ],
-  //     onFinish: () {
-  //       Future.delayed(const Duration(milliseconds: 500), () {
-  //         gameRef.camera.moveToPlayerAnimated();
-  //       });
-  //     },
-  //     logicalKeyboardKeysToNext: [
-  //       LogicalKeyboardKey.space,
-  //     ],
-  //   );
-  // }
 }

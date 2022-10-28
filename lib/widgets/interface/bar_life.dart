@@ -15,8 +15,8 @@ class BarLife extends InterfaceComponent {
   BarLife()
       : super(
           id: 1,
-          position: Vector2(18, 16),
-          spriteUnselected: Sprite.load('decoration/health_ui.png'),
+          position: Vector2(8.5, 16),
+          spriteUnselected: Sprite.load('decoration/health_ui2.png'),
           size: Vector2(120, 40),
         );
 
@@ -34,11 +34,9 @@ class BarLife extends InterfaceComponent {
 
   @override
   void render(Canvas canvas) {
-    try {
-      _drawLife(canvas);
-      _drawStamina(canvas);
-    // ignore: empty_catches
-    } catch (e) {}
+    _drawLife(canvas);
+    _drawStamina(canvas);
+
     super.render(canvas);
   }
 
