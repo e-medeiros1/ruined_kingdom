@@ -15,7 +15,7 @@ class Boss extends SimpleEnemy
           position: position,
           initDirection: Direction.left,
           speed: 85,
-          size: Vector2(tileSize * 9, tileSize * 9),
+          size: Vector2(tileSize * 7, tileSize * 7),
           animation: SimpleDirectionAnimation(
             idleRight: BossSpriteSheet.bossIdleRight,
             idleLeft: BossSpriteSheet.bossIdleLeft,
@@ -28,8 +28,8 @@ class Boss extends SimpleEnemy
       CollisionConfig(
         collisions: [
           CollisionArea.rectangle(
-            size: Vector2(35, 65),
-            align: Vector2(125, 130),
+            size: Vector2(40, 55),
+            align: Vector2(95, 80),
           ),
         ],
       ),
@@ -90,14 +90,15 @@ class Boss extends SimpleEnemy
     seeAndMoveToPlayer(
       closePlayer: (player) {
         followComponent(
-          margin: tileSize,
+          margin: tileSize / 2,
           player,
           dt,
           closeComponent: (player) => execAttack(),
         );
       },
-      radiusVision: tileSize * 5,
+      radiusVision: tileSize * 6,
       runOnlyVisibleInScreen: true,
+      margin: tileSize,
     );
     super.update(dt);
   }
@@ -125,7 +126,7 @@ class Boss extends SimpleEnemy
       withPush: false,
       damage: 30,
       size: Vector2.all(tileSize * 2),
-      interval: 800,
+      interval: 700,
       execute: () {
         _addBossAttackAnimation();
       },
@@ -178,7 +179,7 @@ class Boss extends SimpleEnemy
 
     animation!.playOnce(
       newAnimation,
-      runToTheEnd: true,
+      runToTheEnd: false,
       onFinish: (() {
         canMove = true;
       }),
@@ -235,7 +236,7 @@ class Boss extends SimpleEnemy
 //Death
   @override
   void die() {
-    Sounds.stopBackgroundBossSound();
+    // Sounds.stopBackgroundBossSound();
     Sounds.bossDeath();
     if (gameRef.player!.lastDirectionHorizontal == Direction.left) {
       gameRef.add(
@@ -283,7 +284,7 @@ class Boss extends SimpleEnemy
             zoom: 1.3,
             finish: () {
               canMove = true;
-              Sounds.playBackgroundBossSound();
+              // Sounds.playBackgroundBossSound();
             },
           );
         });

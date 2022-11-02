@@ -336,7 +336,7 @@ class Super extends SimplePlayer with ObjectCollision, Lighting {
   @override
   void die() async {
     Sounds.superDeath();
-    Sounds.stopBackgroundBossSound();
+    // Sounds.stopBackgroundBossSound();
     if (gameRef.player!.lastDirectionHorizontal == Direction.left) {
       gameRef.add(
         AnimatedObjectOnce(
